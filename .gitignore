@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# scratch & temporary drive inspection files
+scratch*
+drive_page.html
+assets/
+
