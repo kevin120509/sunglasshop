@@ -4,179 +4,147 @@ import Image from "next/image";
 import {
   MapPin,
   Phone,
-  MessageCircle,
   ExternalLink,
-  Clock
+  Clock,
+  Car,
+  Info
 } from "lucide-react";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
+import {
+  WHATSAPP_URL,
+  SectionHeading,
+  PendingNote,
+  btnLight,
+  btnWhatsapp,
+  btnPrimary
+} from "@/components/ui";
 import { trackEvent } from "@/lib/analytics";
 
 export default function VisitanosPage() {
-  const handlePhoneClick = () => {
-    trackEvent("click_phone", { location: "visitanos_page" });
-  };
+  const handlePhoneClick = () => trackEvent("click_phone", { location: "visitanos_page" });
+  const handleWhatsappClick = () => trackEvent("click_whatsapp", { location: "visitanos_page" });
+  const handleDirectionsClick = () => trackEvent("click_directions", { location: "visitanos_page" });
 
-  const handleWhatsappClick = () => {
-    trackEvent("click_whatsapp", { location: "visitanos_page" });
-  };
-
-  const handleDirectionsClick = () => {
-    trackEvent("click_directions", { location: "visitanos_page" });
-  };
+  const details = [
+    {
+      icon: MapPin,
+      label: "Ubicación",
+      value: "Plaza Dorada, Local 64",
+      extra: "Calle 50 No. 143 x 15 y 19, Nueva Hidalgo (Entrada 3 por Soriana)",
+    },
+    {
+      icon: Phone,
+      label: "Teléfono",
+      value: "9999 874504",
+    },
+    {
+      icon: Clock,
+      label: "Horario de atención",
+      value: "Lunes a sábado",
+      extra: "11:00 a 20:00 h",
+    },
+  ];
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 font-sans py-16">
-      <div className="max-w-7xl mx-auto px-4 space-y-16">
-        
-        {/* HEADER DE PAGINA */}
-        <div className="text-center max-w-3xl mx-auto space-y-4">
-          <span className="bg-red-600 text-white text-xs font-bold px-3.5 py-1 uppercase tracking-widest inline-block">
-            Página 4 • Ubicación y Contacto
-          </span>
-          <h1 className="text-4xl sm:text-5xl font-black uppercase tracking-tight text-gray-900">
-            Visítanos en Plaza Dorada
-          </h1>
-          <p className="text-lg text-gray-700 leading-relaxed font-medium">
-            Estamos ubicados físicamente en Mérida, Yucatán. Ven a probarte armazones o contáctanos directamente.
-          </p>
-        </div>
+    <section className="py-20 sm:py-24">
+      <div className="max-w-6xl mx-auto px-5 sm:px-6 space-y-14">
+        <SectionHeading
+          as="h1"
+          eyebrow="Ubicación y contacto"
+          title="Visítanos en Plaza Dorada"
+          text="Estamos en Mérida, Yucatán. Ven a probarte armazones o contáctanos directamente."
+        />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          
-          {/* INFORMACIÓN DE LOCAL Y DATOS COMERCIALES */}
-          <div className="lg:col-span-6 bg-black text-white p-8 space-y-8 shadow-xl border-4 border-neutral-900">
-            
-            <div className="border-b border-neutral-800 pb-6 space-y-2">
-              <h2 className="text-2xl sm:text-3xl font-black uppercase text-white flex items-center gap-3">
-                <MapPin className="text-red-600 shrink-0" size={32} />
-                Sunglass Shop Óptica
-              </h2>
-              <p className="text-neutral-300 text-lg font-bold">
-                Plaza Dorada • Mérida, Yucatán
-              </p>
-            </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-            {/* DETALLES DE DIRECCION SOLICITADOS */}
-            <div className="space-y-6 text-sm text-neutral-200">
-              
-              <div className="space-y-1.5">
-                <strong className="block text-white text-base uppercase font-extrabold">Ubicación exacta:</strong>
-                <p className="text-base text-neutral-200 leading-snug">
-                  Plaza Dorada • Calle 50 No. 143 x 15 y 19 Nueva Hidalgo, Loc. 64 (Entrada 3 por Soriana)
-                </p>
-                <span className="text-xs text-yellow-400 font-mono block pt-1 font-semibold">
-                  [PENDIENTE DE VALIDAR CON JUAN]
-                </span>
+          {/* DATOS DEL LOCAL */}
+          <div className="lg:col-span-6 bg-neutral-950 text-white rounded-xl overflow-hidden">
+            <div className="p-8 sm:p-10 space-y-8">
+              <div className="space-y-1">
+                <h2 className="text-2xl font-semibold tracking-tight">Sunglass Shop Óptica</h2>
+                <p className="text-neutral-400">Plaza Dorada · Mérida, Yucatán</p>
               </div>
 
-              <div className="space-y-1.5">
-                <strong className="block text-white text-base uppercase font-extrabold">Teléfono:</strong>
-                <p className="text-2xl font-black text-white">
-                  9999 874504
-                </p>
-                <span className="text-xs text-yellow-400 font-mono block pt-1 font-semibold">
-                  [PENDIENTE DE VALIDAR CON JUAN]
-                </span>
+              <dl className="divide-y divide-white/10 border-y border-white/10">
+                {details.map(({ icon: Icon, label, value, extra }) => (
+                  <div key={label} className="py-5 flex gap-4">
+                    <Icon size={18} className="text-red-500 shrink-0 mt-0.5" />
+                    <div className="space-y-1">
+                      <dt className="text-xs font-semibold uppercase tracking-[0.15em] text-neutral-500">{label}</dt>
+                      <dd className="text-lg text-white">{value}</dd>
+                      {extra && <dd className="text-sm text-neutral-400">{extra}</dd>}
+                      <dd><PendingNote dark /></dd>
+                    </div>
+                  </div>
+                ))}
+              </dl>
+
+              <div className="grid gap-3">
+                <a href="tel:9999874504" onClick={handlePhoneClick} className={btnLight}>
+                  <Phone size={16} />
+                  Llamar al 9999 874504
+                </a>
+                <a
+                  href={`${WHATSAPP_URL}?text=${encodeURIComponent("Hola, quisiera consultar dudas o agendar una visita a Sunglass Shop en Plaza Dorada.")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={handleWhatsappClick}
+                  className={btnWhatsapp}
+                >
+                  <WhatsAppIcon size={18} />
+                  Enviar WhatsApp
+                </a>
+                <a
+                  href="https://maps.google.com/?q=Plaza+Dorada+Merida"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={handleDirectionsClick}
+                  className={btnPrimary}
+                >
+                  <ExternalLink size={16} />
+                  Abrir en Google Maps
+                </a>
               </div>
-
-              <div className="space-y-1.5">
-                <strong className="block text-white text-base uppercase font-extrabold flex items-center gap-2">
-                  <Clock size={18} className="text-neutral-400" />
-                  Horario de Atención:
-                </strong>
-                <p className="text-base text-neutral-200">
-                  Lunes a Sábado: 11:00 AM - 8:00 PM hrs.
-                </p>
-                <span className="text-xs text-yellow-400 font-mono block pt-1 font-semibold">
-                  [PENDIENTE DE VALIDAR CON JUAN]
-                </span>
-              </div>
-
             </div>
-
-            {/* BOTONES DE ACCIÓN DIRECTA MÓVIL (GRANDES Y LEGIBLES) */}
-            <div className="pt-6 border-t border-neutral-800 space-y-4">
-              
-              {/* BOTÓN LLAMADA */}
-              <a
-                href="tel:9999874504"
-                onClick={handlePhoneClick}
-                className="w-full bg-white text-black py-4 px-6 font-black uppercase text-base tracking-wide flex items-center justify-center gap-3 hover:bg-neutral-200 transition-colors shadow-lg"
-              >
-                <Phone size={22} className="text-black" />
-                Llamar al 9999 874504
-              </a>
-
-              {/* BOTÓN WHATSAPP */}
-              <a
-                href="https://wa.me/529999874504?text=Hola,%20quisiera%20consultar%20dudas%20o%20agendar%20una%20visita%20a%20Sunglass%20Shop%20en%20Plaza%20Dorada."
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={handleWhatsappClick}
-                className="w-full bg-emerald-600 text-white py-4 px-6 font-black uppercase text-base tracking-wide flex items-center justify-center gap-3 hover:bg-emerald-700 transition-colors shadow-lg"
-              >
-                <MessageCircle size={22} />
-                Enviar WhatsApp Directo
-              </a>
-
-              {/* BOTÓN GOOGLE MAPS */}
-              <a
-                href="https://maps.google.com/?q=Plaza+Dorada+Merida"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={handleDirectionsClick}
-                className="w-full bg-red-600 text-white py-4 px-6 font-black uppercase text-base tracking-wide flex items-center justify-center gap-3 hover:bg-red-700 transition-colors shadow-lg"
-              >
-                <ExternalLink size={20} />
-                Cómo llegar (Google Maps)
-              </a>
-
-            </div>
-
           </div>
 
-          {/* INDICACIONES Y FOTO DE PRESENTACIÓN DEL LOCAL */}
-          <div className="lg:col-span-6 space-y-6">
-            <div className="bg-neutral-50 border-2 border-neutral-300 p-8 space-y-6">
-              
-              <h2 className="text-2xl font-black uppercase text-gray-900">
-                ¿Cómo llegar al local?
-              </h2>
-              
-              <p className="text-gray-700 text-base leading-relaxed">
-                Plaza Dorada cuenta con amplio estacionamiento. Para encontrarnos rápido, ingresa por la <strong>Entrada 3 (lado Soriana)</strong> donde verás el local de Sunglass Shop Óptica.
-              </p>
+          {/* CÓMO LLEGAR */}
+          <div className="lg:col-span-6 border border-neutral-200 rounded-xl overflow-hidden">
+            <div className="bg-neutral-950 flex items-center justify-center px-10 py-20">
+              <Image
+                src="/images/logo_sunglass_shop.png"
+                alt="Sunglass Shop Óptica Plaza Dorada"
+                width={468}
+                height={100}
+                className="w-full max-w-[17rem] h-auto"
+              />
+            </div>
 
-              {/* TARJETA PROTAGONISTA DE FACHADA */}
-              <div className="bg-neutral-900 border-2 border-neutral-800 p-6 space-y-4 text-white">
-                <div className="relative h-48 bg-neutral-950 flex items-center justify-center p-4 border border-neutral-800">
-                  <Image
-                    src="/images/logo_sunglass_shop_blanco.png"
-                    alt="Fachada Sunglass Shop Plaza Dorada"
-                    width={260}
-                    height={65}
-                    className="object-contain max-h-full w-auto"
-                  />
-                </div>
-                
-                <div className="text-center space-y-1">
-                  <strong className="block text-white text-lg font-bold">Plaza Dorada • Mérida, Yucatán</strong>
-                  <span className="text-xs text-neutral-300">Local 64 • Entrada 3 por Soriana</span>
-                </div>
-              </div>
-
-              <div className="bg-neutral-100 border border-neutral-300 p-4 text-xs text-gray-800 space-y-1">
-                <strong className="text-gray-900 block font-bold">Recomendación para tu visita:</strong>
-                <p>
-                  Puedes llamarnos o enviarnos un mensaje por WhatsApp antes de salir de casa para confirmar disponibilidad de algún modelo o servicio de graduación.
+            <div className="p-8 sm:p-10 space-y-8">
+              <div className="space-y-3">
+                <h2 className="text-xl font-semibold tracking-tight text-neutral-900">¿Cómo llegar al local?</h2>
+                <p className="text-neutral-600 leading-relaxed">
+                  Ingresa a Plaza Dorada por la <strong className="font-semibold text-neutral-900">Entrada 3 (lado Soriana)</strong> y encontrarás Sunglass Shop Óptica en el Local 64.
                 </p>
               </div>
 
+              <ul className="space-y-4 text-sm">
+                <li className="flex gap-3">
+                  <Car size={18} className="text-neutral-400 shrink-0" />
+                  <span className="text-neutral-600">Plaza Dorada cuenta con amplio estacionamiento.</span>
+                </li>
+                <li className="flex gap-3">
+                  <Info size={18} className="text-neutral-400 shrink-0" />
+                  <span className="text-neutral-600">
+                    Te recomendamos llamarnos o escribirnos por WhatsApp antes de salir para confirmar disponibilidad de algún modelo o del examen de la vista.
+                  </span>
+                </li>
+              </ul>
             </div>
           </div>
 
         </div>
-
       </div>
-    </div>
+    </section>
   );
 }

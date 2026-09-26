@@ -5,7 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import LocalBusinessSchema from "@/components/LocalBusinessSchema";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
   title: "Sunglass Shop Óptica | Lentes y Armazones en Plaza Dorada, Mérida",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://www.opticasunglasshop.com.mx/images/logo_sunglass_shop.png",
+        url: "https://www.opticasunglasshop.com.mx/images/og_sunglass_shop.png",
         width: 1200,
         height: 630,
         alt: "Sunglass Shop Óptica Plaza Dorada Mérida"
@@ -54,11 +54,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className="scroll-smooth">
+    <html lang="es" className={`${inter.variable} scroll-smooth`}>
       <head>
         <LocalBusinessSchema />
       </head>
-      <body className={`${inter.className} bg-white text-gray-900 antialiased flex flex-col min-h-screen`}>
+      <body className="font-sans flex flex-col min-h-screen">
         <Header />
         <main className="flex-grow">{children}</main>
         <Footer />

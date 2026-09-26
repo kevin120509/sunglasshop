@@ -3,100 +3,80 @@
 import Link from "next/link";
 import Image from "next/image";
 import { MapPin, Phone, Clock } from "lucide-react";
+import { PendingNote } from "@/components/ui";
 import { trackEvent } from "@/lib/analytics";
+
+const links = [
+  { name: "Inicio", href: "/" },
+  { name: "Servicios", href: "/servicios" },
+  { name: "Lentes y marcas", href: "/lentes" },
+  { name: "Visítanos", href: "/visitanos" },
+];
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-neutral-900 text-white border-t border-neutral-800 pt-16 pb-12 mt-20">
-      <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12">
+    <footer className="bg-neutral-950 text-neutral-400 border-t border-white/10">
+      <div className="max-w-6xl mx-auto px-5 sm:px-6 py-16 grid grid-cols-1 md:grid-cols-12 gap-12">
         {/* BRAND COLUMN */}
-        <div className="md:col-span-2 space-y-4">
-          <div className="relative h-12 w-52">
-            <Image
-              src="/images/logo_sunglass_shop_blanco.png"
-              alt="Sunglass Shop Óptica"
-              width={220}
-              height={55}
-              className="object-contain h-full w-auto brightness-200"
-            />
-          </div>
-          <p className="text-neutral-400 text-base max-w-md leading-relaxed">
-            Óptica física ubicada en Plaza Dorada, Mérida. Encuentra armazones, lentes de sol, micas graduadas y servicios de mantenimiento óptico de forma rápida y sencilla.
+        <div className="md:col-span-5 space-y-5">
+          <Image
+            src="/images/logo_sunglass_shop.png"
+            alt="Sunglass Shop Óptica"
+            width={468}
+            height={100}
+            className="h-9 w-auto"
+          />
+          <p className="text-sm leading-relaxed max-w-sm">
+            Óptica en Plaza Dorada, Mérida. Examen de la vista, micas de calidad, armazones y lentes de sol, con orientación honesta.
           </p>
-          <div className="pt-2">
-            <span className="inline-block bg-neutral-800 text-neutral-300 text-xs px-3 py-1 font-semibold uppercase tracking-wider">
-              Plaza Dorada • Mérida, Yucatán
-            </span>
-          </div>
         </div>
 
-        {/* NAVIGATION COLUMN (4 DISTINCT PAGES) */}
-        <div>
-          <h3 className="text-lg font-bold uppercase tracking-wider mb-6 text-white border-b border-neutral-800 pb-2">
-            Páginas Principales
-          </h3>
-          <ul className="space-y-3 font-medium text-base text-neutral-300">
-            <li>
-              <Link href="/" className="hover:text-red-400 transition-colors">
-                1. Inicio
-              </Link>
-            </li>
-            <li>
-              <Link href="/lentes" className="hover:text-red-400 transition-colors">
-                2. Lentes y marcas
-              </Link>
-            </li>
-            <li>
-              <Link href="/servicios" className="hover:text-red-400 transition-colors">
-                3. Servicios
-              </Link>
-            </li>
-            <li>
-              <Link href="/visitanos" className="hover:text-red-400 transition-colors">
-                4. Visítanos
-              </Link>
-            </li>
+        {/* NAVIGATION COLUMN */}
+        <div className="md:col-span-3">
+          <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white mb-5">Navegación</h3>
+          <ul className="space-y-3 text-sm">
+            {links.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} className="hover:text-white transition-colors">
+                  {link.name}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 
         {/* CONTACT COLUMN */}
-        <div>
-          <h3 className="text-lg font-bold uppercase tracking-wider mb-6 text-white border-b border-neutral-800 pb-2">
-            Ubicación y Contacto
-          </h3>
-          <ul className="space-y-4 text-sm text-neutral-300">
+        <div className="md:col-span-4">
+          <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white mb-5">Contacto</h3>
+          <ul className="space-y-5 text-sm">
             <li className="flex items-start gap-3">
-              <MapPin size={20} className="text-red-500 shrink-0 mt-1" />
-              <div>
-                <strong className="block text-white text-base">Plaza Dorada</strong>
-                <span>Calle 50 No. 143 x 15 y 19 Nueva Hidalgo, Loc. 64</span>
-                <span className="block text-xs text-neutral-400 mt-0.5">Entrada 3 por Soriana</span>
-                <span className="text-xs text-yellow-500 font-mono block mt-1">[PENDIENTE DE VALIDAR CON JUAN]</span>
+              <MapPin size={16} className="text-red-500 shrink-0 mt-0.5" />
+              <div className="space-y-1">
+                <span className="block text-white">Plaza Dorada, Loc. 64</span>
+                <span className="block">Calle 50 No. 143 x 15 y 19, Nueva Hidalgo. Entrada 3 por Soriana.</span>
+                <PendingNote dark />
               </div>
             </li>
-
             <li className="flex items-start gap-3">
-              <Phone size={18} className="text-neutral-400 shrink-0 mt-1" />
-              <div>
+              <Phone size={16} className="shrink-0 mt-0.5" />
+              <div className="space-y-1">
                 <a
                   href="tel:9999874504"
                   onClick={() => trackEvent("click_phone", { location: "footer" })}
-                  className="font-bold text-white text-base hover:text-red-400 transition-colors"
+                  className="block text-white hover:text-red-400 transition-colors"
                 >
-                  Tel: 9999 874504
+                  9999 874504
                 </a>
-                <span className="text-xs text-yellow-500 font-mono block">[PENDIENTE DE VALIDAR CON JUAN]</span>
+                <PendingNote dark />
               </div>
             </li>
-
             <li className="flex items-start gap-3">
-              <Clock size={18} className="text-neutral-400 shrink-0 mt-1" />
-              <div>
-                <span className="font-semibold text-white">Horario sugerido:</span>
-                <span className="block text-neutral-300">Lunes a Sábado de 11:00 a 20:00 hrs.</span>
-                <span className="text-xs text-yellow-500 font-mono block">[PENDIENTE DE VALIDAR CON JUAN]</span>
+              <Clock size={16} className="shrink-0 mt-0.5" />
+              <div className="space-y-1">
+                <span className="block text-white">Lunes a sábado, 11:00 a 20:00 h</span>
+                <PendingNote dark />
               </div>
             </li>
           </ul>
@@ -104,11 +84,11 @@ export default function Footer() {
       </div>
 
       {/* BOTTOM BAR */}
-      <div className="max-w-7xl mx-auto px-4 mt-16 pt-8 border-t border-neutral-800 flex flex-col md:flex-row justify-between items-center text-xs text-neutral-500 gap-4">
-        <p>© {currentYear} Sunglass Shop Óptica. Plaza Dorada, Mérida, Yucatán.</p>
-        <p className="text-center md:text-right">
-          Sitio de representación digital comercial. Desarrollado para el Señor Juan por CODIA.
-        </p>
+      <div className="border-t border-white/10">
+        <div className="max-w-6xl mx-auto px-5 sm:px-6 py-6 flex flex-col md:flex-row justify-between gap-2 text-xs text-neutral-500">
+          <p>© {currentYear} Sunglass Shop Óptica · Plaza Dorada, Mérida, Yucatán.</p>
+          <p>Sitio de representación digital comercial. Desarrollado para el Señor Juan por CODIA.</p>
+        </div>
       </div>
     </footer>
   );

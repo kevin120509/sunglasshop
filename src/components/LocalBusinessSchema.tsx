@@ -3,7 +3,7 @@ export default function LocalBusinessSchema() {
     "@context": "https://schema.org",
     "@type": "Optician",
     "name": "Sunglass Shop Óptica",
-    "image": "https://www.opticasunglasshop.com.mx/images/logo_sunglass_shop.png",
+    "image": "https://www.opticasunglasshop.com.mx/images/og_sunglass_shop.png",
     "@id": "https://www.opticasunglasshop.com.mx/#optica",
     "url": "https://www.opticasunglasshop.com.mx/",
     "telephone": "+529999874504",

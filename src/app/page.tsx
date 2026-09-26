@@ -5,235 +5,233 @@ import Link from "next/link";
 import {
   MapPin,
   Phone,
-  MessageCircle,
   Glasses,
   Eye,
-  ChevronRight
+  ArrowRight,
+  Layers,
+  Stethoscope
 } from "lucide-react";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
+import {
+  WHATSAPP_URL,
+  Eyebrow,
+  SectionHeading,
+  IconBox,
+  btnPrimary,
+  btnWhatsapp,
+  btnOutlineLight
+} from "@/components/ui";
 import { trackEvent } from "@/lib/analytics";
 
+const steps = [
+  {
+    icon: Eye,
+    title: "Resolvemos tu problema visual",
+    text: "Examen de la vista para detectar y corregir miopía, hipermetropía, astigmatismo o presbicia. Si notamos algo que requiere a un médico oftalmólogo, te lo decimos y te canalizamos.",
+  },
+  {
+    icon: Layers,
+    title: "Te asesoramos en la mica",
+    text: "Te explicamos con claridad las opciones de micas y tratamientos según tu graduación y tu uso diario, para que entiendas qué estás eligiendo.",
+  },
+  {
+    icon: Glasses,
+    title: "Eliges tu armazón",
+    text: "Con tu graduación y tu mica definidas, te orientamos para encontrar el armazón que mejor se adapte a tu rostro, estilo y presupuesto.",
+  },
+];
+
+const sections = [
+  {
+    icon: Eye,
+    title: "Servicios ópticos",
+    text: "Examen de la vista, gamas de micas explicadas con claridad, ajuste de tus lentes después del examen y Hospital de Lentes para reparaciones.",
+    href: "/servicios",
+    cta: "Ver servicios",
+    event: "view_services" as const,
+  },
+  {
+    icon: Glasses,
+    title: "Lentes y marcas",
+    text: "Armazones para dama, caballero y jóvenes, lentes de sol con filtro UV, micas digitalizadas y asesoría de imagen para elegir el modelo ideal.",
+    href: "/lentes",
+    cta: "Ver lentes y marcas",
+    event: "view_products" as const,
+  },
+  {
+    icon: MapPin,
+    title: "Visítanos en Plaza Dorada",
+    text: "Conoce nuestra ubicación exacta, llamada directa, canal de WhatsApp y cómo llegar por la entrada 3 de Soriana en Mérida.",
+    href: "/visitanos",
+    cta: "Ver dirección",
+    event: "click_directions" as const,
+    accent: true,
+  },
+];
+
 export default function Home() {
-  const handlePhoneClick = () => {
-    trackEvent("click_phone", { section: "inicio" });
-  };
-
-  const handleWhatsappClick = () => {
-    trackEvent("click_whatsapp", { section: "inicio" });
-  };
-
-  const handleDirectionsClick = () => {
-    trackEvent("click_directions", { section: "inicio" });
-  };
+  const handlePhoneClick = () => trackEvent("click_phone", { section: "inicio" });
+  const handleWhatsappClick = () => trackEvent("click_whatsapp", { section: "inicio" });
+  const handleDirectionsClick = () => trackEvent("click_directions", { section: "inicio" });
 
   return (
-    <div className="flex flex-col min-h-screen font-sans bg-white text-gray-900">
-      
-      {/* 1. HERO / INICIO CON ENFOQUE VISUAL Y DIRECTO */}
-      <section className="relative bg-black text-white py-16 lg:py-24 border-b-4 border-red-600">
-        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
-          {/* COLUMNA IZQUIERDA: TEXTO COMERCIAL DIRECTO */}
-          <div className="lg:col-span-7 space-y-6 text-left">
-            
-            {/* INSIGNIA DE UBICACION REAL */}
-            <div className="inline-flex items-center gap-2 bg-neutral-900 border border-neutral-700 text-neutral-200 px-4 py-2 rounded-none text-xs sm:text-sm font-bold uppercase tracking-wider">
-              <MapPin size={16} className="text-red-600 shrink-0" />
-              <span>Plaza Dorada • Mérida, Yucatán</span>
+    <div className="flex flex-col">
+
+      {/* 1. HERO */}
+      <section className="relative bg-neutral-950 text-white overflow-hidden">
+        <div className="absolute inset-x-0 bottom-0 h-px bg-red-600" />
+        <div className="max-w-6xl mx-auto px-5 sm:px-6 py-20 lg:py-28 grid grid-cols-1 lg:grid-cols-12 gap-14 items-center">
+
+          {/* TEXTO */}
+          <div className="lg:col-span-7 space-y-8">
+            <Eyebrow light>Plaza Dorada · Mérida, Yucatán</Eyebrow>
+
+            <div className="space-y-6">
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.02]">
+                Sunglass Shop <span className="text-red-600">Óptica</span>
+              </h1>
+              <p className="text-xl sm:text-2xl text-neutral-200 leading-snug max-w-xl text-pretty">
+                Examen de la vista, micas de calidad y orientación honesta.
+              </p>
+              <p className="text-base text-neutral-400 leading-relaxed max-w-lg">
+                Primero resolvemos cómo ves. Después te ayudamos a elegir la mica y el armazón adecuados para ti.
+              </p>
             </div>
 
-            {/* TITULO Y SUBTITULO SOLICITADO */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white leading-tight">
-              Sunglass Shop <span className="text-red-600">Óptica</span>
-            </h1>
-
-            <p className="text-xl sm:text-2xl text-neutral-200 font-medium leading-relaxed max-w-2xl">
-              Lentes, armazones y servicios ópticos en Plaza Dorada, Mérida.
-            </p>
-
-            {/* CTAS PRINCIPALES: CÓMO LLEGAR, WHATSAPP Y LLAMAR */}
-            <div className="pt-4 flex flex-col sm:flex-row gap-4">
-              <Link
-                href="/visitanos"
-                onClick={handleDirectionsClick}
-                className="bg-red-600 text-white text-center px-8 py-4 text-base sm:text-lg font-black uppercase tracking-wide hover:bg-red-700 transition-colors flex items-center justify-center gap-2 shadow-lg"
-              >
-                <MapPin size={22} /> Cómo llegar
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Link href="/visitanos" onClick={handleDirectionsClick} className={btnPrimary}>
+                <MapPin size={18} /> Cómo llegar
               </Link>
-
               <a
-                href="https://wa.me/529999874504?text=Hola,%20quisiera%20información%20sobre%20sus%20lentes%20y%20servicios%20en%20Plaza%20Dorada."
+                href={`${WHATSAPP_URL}?text=${encodeURIComponent("Hola, quisiera información sobre sus lentes y servicios en Plaza Dorada.")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleWhatsappClick}
-                className="bg-emerald-600 text-white text-center px-8 py-4 text-base sm:text-lg font-black uppercase tracking-wide hover:bg-emerald-700 transition-colors flex items-center justify-center gap-2 shadow-lg"
+                className={btnWhatsapp}
               >
-                <MessageCircle size={22} /> Enviar WhatsApp
+                <WhatsAppIcon size={18} /> Enviar WhatsApp
+              </a>
+              <a href="tel:9999874504" onClick={handlePhoneClick} className={btnOutlineLight}>
+                <Phone size={16} /> Llamar
               </a>
             </div>
-
-            {/* BOTONES SECUNDARIOS RÁPIDOS */}
-            <div className="pt-6 border-t border-neutral-800 flex flex-wrap gap-4 text-sm font-bold">
-              <a
-                href="tel:9999874504"
-                onClick={handlePhoneClick}
-                className="flex items-center gap-2 bg-neutral-900 hover:bg-neutral-800 text-white border border-neutral-700 px-5 py-3 transition-colors"
-              >
-                <Phone size={16} className="text-red-500" />
-                <span>Llamar al 9999 874504</span>
-              </a>
-
-              <Link
-                href="/lentes"
-                onClick={() => trackEvent("view_products", { location: "hero" })}
-                className="flex items-center gap-2 bg-white text-black hover:bg-neutral-200 px-5 py-3 transition-colors uppercase"
-              >
-                <Glasses size={16} />
-                <span>Ver Lentes y Marcas</span>
-              </Link>
-            </div>
-
           </div>
 
-          {/* COLUMNA DERECHA: TARJETA PROTAGONISTA DEL ESTABLECIMIENTO */}
-          <div className="lg:col-span-5 relative">
-            <div className="bg-neutral-900 border-2 border-neutral-700 p-6 sm:p-8 space-y-6 shadow-2xl">
-              
-              <div className="flex items-center justify-between border-b border-neutral-800 pb-4">
-                <span className="text-xs font-mono uppercase tracking-widest text-neutral-400">
-                  Local Físico
-                </span>
-                <span className="bg-emerald-500/20 text-emerald-400 text-xs px-3 py-1 font-bold uppercase">
-                  Plaza Dorada
-                </span>
-              </div>
-
-              {/* CONTENEDOR VISUAL CON LOGOTIPO OFICIAL */}
-              <div className="relative h-56 bg-neutral-950 flex items-center justify-center p-6 border border-neutral-800">
+          {/* TARJETA DEL LOCAL */}
+          <div className="lg:col-span-5">
+            <div className="border border-white/10 bg-white/[0.03] rounded-2xl overflow-hidden">
+              <div className="flex items-center justify-center px-8 py-16 border-b border-white/10">
                 <Image
-                  src="/images/logo_sunglass_shop_blanco.png"
+                  src="/images/logo_sunglass_shop.png"
                   alt="Sunglass Shop Óptica Plaza Dorada Mérida"
-                  width={300}
-                  height={75}
-                  className="object-contain max-h-full w-auto"
+                  width={468}
+                  height={100}
+                  className="w-full max-w-[17rem] h-auto"
                   priority
                 />
               </div>
 
-              {/* DATOS CLAVE DE LA SUCURSAL */}
-              <div className="space-y-3 text-sm text-neutral-200">
+              <div className="p-7 space-y-6">
                 <div className="flex items-start gap-3">
-                  <MapPin size={20} className="text-red-500 shrink-0 mt-0.5" />
-                  <div>
-                    <strong className="block text-white text-base font-bold">Plaza Dorada</strong>
-                    <span>Calle 50 No. 143 x 15 y 19 Nueva Hidalgo, Loc. 64</span>
-                    <span className="block text-xs text-neutral-400">Entrada 3 por Soriana • Mérida, Yucatán</span>
+                  <MapPin size={18} className="text-red-500 shrink-0 mt-0.5" />
+                  <div className="space-y-1 text-sm">
+                    <strong className="block text-white font-semibold text-base">Plaza Dorada, Local 64</strong>
+                    <span className="block text-neutral-400">Calle 50 No. 143 x 15 y 19, Nueva Hidalgo</span>
+                    <span className="block text-neutral-500">Entrada 3 por Soriana</span>
                   </div>
                 </div>
+
+                <Link
+                  href="/visitanos"
+                  onClick={handleDirectionsClick}
+                  className="group flex items-center justify-between border-t border-white/10 pt-5 text-sm font-semibold uppercase tracking-wider text-white hover:text-red-400 transition-colors"
+                >
+                  Ver mapa y cómo llegar
+                  <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                </Link>
               </div>
-
-              <Link
-                href="/visitanos"
-                onClick={handleDirectionsClick}
-                className="w-full bg-white text-black text-center py-3.5 font-black uppercase text-sm tracking-wide block hover:bg-neutral-200 transition-colors"
-              >
-                Ver mapa y cómo llegar
-              </Link>
-
             </div>
           </div>
 
         </div>
       </section>
 
-      {/* 2. ACCESOS DIRECTOS A LAS 3 SECCIONES SECUNDARIAS */}
-      <section className="py-20 bg-neutral-100 border-b border-neutral-300">
-        <div className="max-w-7xl mx-auto px-4 space-y-12">
-          
-          <div className="text-center max-w-3xl mx-auto space-y-3">
-            <span className="bg-black text-white text-xs font-bold px-3.5 py-1 uppercase tracking-widest inline-block">
-              Óptica Real en Plaza Dorada
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-black uppercase tracking-tight text-gray-900">
-              ¿Qué buscas hoy en Sunglass Shop?
-            </h2>
-            <p className="text-lg text-gray-700 font-medium">
-              Navega fácilmente por las secciones de nuestra óptica.
-            </p>
+      {/* 2. PROCESO DE ATENCIÓN EN 3 PASOS */}
+      <section className="py-24">
+        <div className="max-w-6xl mx-auto px-5 sm:px-6 space-y-14">
+          <SectionHeading
+            eyebrow="Cómo te atendemos"
+            title="Tres pasos, en el orden correcto"
+            text="Antes de hablar de armazones, nos aseguramos de que realmente veas bien."
+          />
+
+          <ol className="grid grid-cols-1 md:grid-cols-3 border-t border-neutral-900">
+            {steps.map(({ icon: Icon, title, text }, i) => (
+              <li
+                key={title}
+                className="pt-8 pb-10 md:pr-10 md:[&:not(:first-child)]:pl-10 md:[&:not(:first-child)]:border-l border-neutral-200 space-y-5 border-b md:border-b-0"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-semibold text-red-600 tabular-nums">0{i + 1}</span>
+                  <Icon size={22} className="text-neutral-400" />
+                </div>
+                <h3 className="text-xl font-semibold tracking-tight text-neutral-900">{title}</h3>
+                <p className="text-neutral-600 leading-relaxed">{text}</p>
+              </li>
+            ))}
+          </ol>
+
+          {/* ALCANCE HONESTO */}
+          <div className="bg-neutral-50 border-l-2 border-red-600 rounded-r-xl p-8 sm:p-10 flex flex-col sm:flex-row gap-6">
+            <IconBox accent>
+              <Stethoscope size={20} />
+            </IconBox>
+            <div className="space-y-2">
+              <h3 className="text-lg font-semibold text-neutral-900">Te decimos con honestidad qué podemos resolver</h3>
+              <p className="text-neutral-600 leading-relaxed max-w-3xl">
+                Corregimos la agudeza visual: miopía, hipermetropía, astigmatismo y presbicia (vista cansada). Condiciones como cataratas, glaucoma o complicaciones visuales por diabetes o hipertensión deben ser atendidas por un médico oftalmólogo, y así te lo indicaremos.
+              </p>
+            </div>
           </div>
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            
-            {/* SECCION LENTES Y MARCAS */}
-            <div className="bg-white border-2 border-neutral-200 p-8 shadow-xs hover:border-black transition-colors flex flex-col justify-between space-y-6">
-              <div className="space-y-4">
-                <div className="w-14 h-14 bg-black text-white flex items-center justify-center">
-                  <Glasses size={28} />
-                </div>
-                <h3 className="text-2xl font-black uppercase tracking-tight text-gray-900">
-                  Lentes y Marcas
-                </h3>
-                <p className="text-gray-700 text-base leading-relaxed">
-                  Armazones para dama, caballero y jóvenes, lentes de sol con filtro UV y marcas destacadas como Ray-Ban, Oakley, Vogue y Michael Kors.
-                </p>
-              </div>
+      {/* 3. ACCESOS A LAS SECCIONES */}
+      <section className="py-24 bg-neutral-50 border-t border-neutral-200">
+        <div className="max-w-6xl mx-auto px-5 sm:px-6 space-y-14">
+          <SectionHeading
+            eyebrow="Óptica en Plaza Dorada"
+            title="¿Qué buscas hoy en Sunglass Shop?"
+          />
 
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {sections.map(({ icon: Icon, title, text, href, cta, event, accent }) => (
               <Link
-                href="/lentes"
-                onClick={() => trackEvent("view_products", { location: "home_card" })}
-                className="inline-flex items-center gap-2 font-black uppercase text-sm text-black hover:text-red-600 pt-4 border-t border-neutral-200"
+                key={href}
+                href={href}
+                onClick={() => trackEvent(event, { location: "home_card" })}
+                className={`group bg-white border rounded-xl p-8 flex flex-col justify-between gap-10 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-neutral-900/5 ${
+                  accent ? "border-red-600" : "border-neutral-200 hover:border-neutral-900"
+                }`}
               >
-                Ver Lentes y Marcas <ChevronRight size={18} />
-              </Link>
-            </div>
-
-            {/* SECCION SERVICIOS */}
-            <div className="bg-white border-2 border-neutral-200 p-8 shadow-xs hover:border-black transition-colors flex flex-col justify-between space-y-6">
-              <div className="space-y-4">
-                <div className="w-14 h-14 bg-black text-white flex items-center justify-center">
-                  <Eye size={28} />
+                <div className="space-y-5">
+                  <IconBox accent={accent}>
+                    <Icon size={20} />
+                  </IconBox>
+                  <h3 className="text-xl font-semibold tracking-tight text-neutral-900">{title}</h3>
+                  <p className="text-neutral-600 leading-relaxed">{text}</p>
                 </div>
-                <h3 className="text-2xl font-black uppercase tracking-tight text-gray-900">
-                  Servicios Ópticos
-                </h3>
-                <p className="text-gray-700 text-base leading-relaxed">
-                  Examen de la vista, asesoría directa para elegir armazón, micas con graduación y servicio de Hospital de Lentes para ajustes y reparaciones.
-                </p>
-              </div>
-
-              <Link
-                href="/servicios"
-                onClick={() => trackEvent("view_services", { location: "home_card" })}
-                className="inline-flex items-center gap-2 font-black uppercase text-sm text-black hover:text-red-600 pt-4 border-t border-neutral-200"
-              >
-                Ver Servicios Ópticos <ChevronRight size={18} />
+                <span
+                  className={`inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider ${
+                    accent ? "text-red-600" : "text-neutral-900"
+                  }`}
+                >
+                  {cta}
+                  <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                </span>
               </Link>
-            </div>
-
-            {/* SECCION VISÍTANOS */}
-            <div className="bg-white border-2 border-red-600 p-8 shadow-xs hover:bg-red-50/50 transition-colors flex flex-col justify-between space-y-6">
-              <div className="space-y-4">
-                <div className="w-14 h-14 bg-red-600 text-white flex items-center justify-center">
-                  <MapPin size={28} />
-                </div>
-                <h3 className="text-2xl font-black uppercase tracking-tight text-gray-900">
-                  Visítanos en Plaza Dorada
-                </h3>
-                <p className="text-gray-700 text-base leading-relaxed">
-                  Conoce nuestra ubicación exacta, llamada directa, canal de WhatsApp y cómo llegar por la entrada 3 de Soriana en Mérida.
-                </p>
-              </div>
-
-              <Link
-                href="/visitanos"
-                onClick={handleDirectionsClick}
-                className="inline-flex items-center gap-2 font-black uppercase text-sm text-red-600 hover:text-red-700 pt-4 border-t border-neutral-200"
-              >
-                Ver Dirección y WhatsApp <ChevronRight size={18} />
-              </Link>
-            </div>
-
+            ))}
           </div>
-
         </div>
       </section>
 

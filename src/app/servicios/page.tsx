@@ -1,148 +1,256 @@
 "use client";
 
-import Link from "next/link";
 import {
   Eye,
   ShieldCheck,
   Sparkles,
   Settings,
-  AlertCircle,
-  MessageCircle,
-  ArrowRight
+  Ruler,
+  Stethoscope,
+  Plus,
+  Check
 } from "lucide-react";
-import { trackEvent } from "@/lib/analytics";
+import { SectionHeading, IconBox, PendingNote, CtaBanner } from "@/components/ui";
+
+const services = [
+  {
+    icon: Eye,
+    title: "Examen de la vista",
+    text: "Medimos tu agudeza visual para corregir miopía, hipermetropía, astigmatismo y presbicia (vista cansada). Te explicamos tu graduación sin tecnicismos.",
+    note: "Si detectamos algo fuera de nuestro alcance, te canalizamos con un oftalmólogo",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Asesoría de imagen",
+    text: "Te orientamos para elegir el armazón que mejor se adapte a la forma de tu rostro, tu estilo personal, tu uso diario y el tipo de mica que necesitas.",
+    note: "Recomendación práctica según tus facciones",
+  },
+  {
+    icon: Sparkles,
+    title: "Micas y tratamientos",
+    text: "Micas digitalizadas de visión sencilla, bifocales y progresivas, con tratamientos antirreflejantes, fotocromáticos y protección contra luz azul.",
+    note: "Opciones según tu graduación y estilo de vida",
+  },
+  {
+    icon: Settings,
+    title: "Ajuste y Hospital de Lentes",
+    text: "Ajustamos tus lentes después del examen para que la mica quede en la posición correcta. También realizamos nivelación de varillas, cambio de plaquetas y reparaciones.",
+    pending: "Disponibilidad de refacciones específicas",
+  },
+];
+
+const micaRanges = [
+  {
+    name: "Básica",
+    text: "Corrige tu graduación de forma funcional. Una opción de entrada para necesidades visuales sencillas.",
+  },
+  {
+    name: "Estándar",
+    text: "Mejor calidad óptica y mayor comodidad para el uso diario, con opción de agregar tratamientos.",
+  },
+  {
+    name: "Panorámica",
+    text: "Campo de visión más amplio y nítido, con mejor adaptación. Es la que recomendamos para una visión óptima.",
+    recommended: true,
+  },
+];
+
+const treatments = [
+  { name: "Varilux · Essilor", text: "Micas progresivas de una de las marcas líderes a nivel mundial." },
+  { name: "Kodak Lens", text: "Micas de alta calidad para resolver distintos problemas visuales." },
+  { name: "Transitions", text: "Tratamiento fotocromático: la mica se oscurece con el sol y se aclara en interiores." },
+  { name: "Crizal", text: "Tratamiento antirreflejante que reduce reflejos y facilita la limpieza." },
+];
+
+const faqs = [
+  {
+    q: "¿Qué problemas visuales pueden resolver en la óptica?",
+    a: "Corregimos la agudeza visual: miopía, hipermetropía, astigmatismo y presbicia (vista cansada). Cataratas, glaucoma o complicaciones por diabetes o hipertensión deben ser atendidas por un médico oftalmólogo; si notamos alguna señal, te lo indicamos con honestidad.",
+  },
+  {
+    q: "¿Por qué hay tanta diferencia de precio entre unas micas y otras?",
+    a: "La calidad del material y de los tratamientos influye directamente en qué tan bien ves y qué tan rápido te adaptas. Muchas veces la falta de adaptación a unos lentes se debe a materiales de baja calidad. Te explicamos las diferencias para que elijas con información.",
+  },
+  {
+    q: "¿Qué diferencia hay entre micas monofocales, bifocales y progresivas?",
+    a: "Las monofocales (visión sencilla) corrigen una sola distancia. Las bifocales tienen dos zonas: lejos y cerca. Las progresivas permiten ver a todas las distancias con una transición suave, sin línea visible.",
+  },
+  {
+    q: "¿Por qué es importante ajustar los lentes después de hacerlos?",
+    a: "Al colocar las micas cambia el peso y la posición del armazón, y puede curvarse hacia adentro o hacia afuera. El armazón debe tener una ligera inclinación (ángulo pantoscópico) y la altura y distancia correctas; esto es especialmente importante para leer con progresivos.",
+  },
+  {
+    q: "¿Necesito cita para el examen de la vista?",
+    a: "Te recomendamos escribirnos por WhatsApp o llamarnos antes de tu visita para confirmar disponibilidad.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map(({ q, a }) => ({
+    "@type": "Question",
+    name: q,
+    acceptedAnswer: { "@type": "Answer", text: a },
+  })),
+};
+
+const container = "max-w-6xl mx-auto px-5 sm:px-6";
 
 export default function ServiciosPage() {
-  const handleWhatsappClick = () => {
-    trackEvent("click_whatsapp", { location: "servicios_page" });
-  };
-
   return (
-    <div className="min-h-screen bg-white text-gray-900 font-sans py-16">
-      <div className="max-w-7xl mx-auto px-4 space-y-16">
-        
-        {/* HEADER DE PAGINA */}
-        <div className="text-center max-w-3xl mx-auto space-y-4">
-          <span className="bg-black text-white text-xs font-bold px-3.5 py-1 uppercase tracking-widest inline-block">
-            Página 3 • Servicios Ópticos
-          </span>
-          <h1 className="text-4xl sm:text-5xl font-black uppercase tracking-tight text-gray-900">
-            Nuestros Servicios
-          </h1>
-          <p className="text-lg text-gray-700 leading-relaxed font-medium">
-            Explicamos con claridad y sencillez lo que podemos hacer por ti en Sunglass Shop.
-          </p>
-        </div>
+    <div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c") }}
+      />
 
-        {/* MÁXIMO 4 SERVICIOS PRINCIPALES SOLICITADOS */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          
-          {/* SERVICIO 1: EXAMEN DE LA VISTA */}
-          <div className="bg-neutral-50 border-2 border-neutral-200 p-8 space-y-4 flex flex-col justify-between hover:border-black transition-colors">
-            <div className="space-y-4">
-              <div className="w-14 h-14 bg-black text-white flex items-center justify-center font-bold">
-                <Eye size={28} />
+      {/* INTRO + SERVICIOS */}
+      <section className="py-20 sm:py-24">
+        <div className={`${container} space-y-14`}>
+          <SectionHeading
+            as="h1"
+            eyebrow="Servicios ópticos"
+            title="Primero resolvemos cómo ves"
+            text="Te explicamos con claridad cada paso para que tomes la mejor decisión sobre tu vista y tus lentes."
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-neutral-200 border border-neutral-200 rounded-xl overflow-hidden">
+            {services.map(({ icon: Icon, title, text, note, pending }, i) => (
+              <div key={title} className="bg-white p-8 sm:p-10 flex flex-col justify-between gap-8">
+                <div className="space-y-5">
+                  <div className="flex items-center justify-between">
+                    <IconBox accent={!!pending}>
+                      <Icon size={20} />
+                    </IconBox>
+                    <span className="text-sm font-semibold text-neutral-300 tabular-nums">0{i + 1}</span>
+                  </div>
+                  <h2 className="text-xl font-semibold tracking-tight text-neutral-900">{title}</h2>
+                  <p className="text-neutral-600 leading-relaxed">{text}</p>
+                </div>
+                {pending ? (
+                  <PendingNote>{pending}</PendingNote>
+                ) : (
+                  <p className="text-xs font-medium uppercase tracking-wider text-neutral-400">{note}</p>
+                )}
               </div>
-              <h2 className="text-2xl font-black uppercase text-gray-900">
-                1. Examen de la Vista
-              </h2>
-              <p className="text-gray-700 text-base leading-relaxed">
-                Consulta nuestro servicio de examen de la vista y recibe orientación clara sobre tus opciones de graduación y cuidado visual.
+            ))}
+          </div>
+
+          {/* ALCANCE HONESTO */}
+          <div className="bg-neutral-950 text-white rounded-xl p-8 sm:p-10 flex flex-col sm:flex-row gap-6">
+            <IconBox accent>
+              <Stethoscope size={20} />
+            </IconBox>
+            <div className="space-y-2">
+              <h2 className="text-lg font-semibold">Honestidad ante todo</h2>
+              <p className="text-neutral-400 leading-relaxed max-w-3xl">
+                Nuestra prioridad es que veas bien. Si durante el examen notamos señales de cataratas, glaucoma o complicaciones por diabetes o hipertensión, te recomendaremos acudir con un médico oftalmólogo antes de cualquier otra cosa.
               </p>
             </div>
-            <div className="pt-4 border-t border-neutral-200 text-xs text-gray-600 font-bold uppercase tracking-wider">
-              Atención directa sin tecnicismos
-            </div>
-          </div>
-
-          {/* SERVICIO 2: ASESORÍA PARA ELEGIR TUS LENTES */}
-          <div className="bg-neutral-50 border-2 border-neutral-200 p-8 space-y-4 flex flex-col justify-between hover:border-black transition-colors">
-            <div className="space-y-4">
-              <div className="w-14 h-14 bg-black text-white flex items-center justify-center font-bold">
-                <ShieldCheck size={28} />
-              </div>
-              <h2 className="text-2xl font-black uppercase text-gray-900">
-                2. Asesoría para Elegir tus Lentes
-              </h2>
-              <p className="text-gray-700 text-base leading-relaxed">
-                Te ayudamos a conocer armazones que se adapten a la forma de tu rostro, tu estilo personal y tu uso diario.
-              </p>
-            </div>
-            <div className="pt-4 border-t border-neutral-200 text-xs text-gray-600 font-bold uppercase tracking-wider">
-              Recomendación práctica según tus facciones
-            </div>
-          </div>
-
-          {/* SERVICIO 3: MICAS Y SOLUCIONES VISUALES */}
-          <div className="bg-neutral-50 border-2 border-neutral-200 p-8 space-y-4 flex flex-col justify-between hover:border-black transition-colors">
-            <div className="space-y-4">
-              <div className="w-14 h-14 bg-black text-white flex items-center justify-center font-bold">
-                <Sparkles size={28} />
-              </div>
-              <h2 className="text-2xl font-black uppercase text-gray-900">
-                3. Micas y Soluciones Visuales
-              </h2>
-              <p className="text-gray-700 text-base leading-relaxed">
-                Conoce alternativas de micas monofocales, progresivas panorámicas, tratamiento antirreflejante y protección contra luz azul de pantallas.
-              </p>
-            </div>
-            <div className="pt-4 border-t border-neutral-200 text-xs text-gray-600 font-bold uppercase tracking-wider">
-              Opciones según tus requerimientos de visión
-            </div>
-          </div>
-
-          {/* SERVICIO 4: HOSPITAL DE LENTES / AJUSTES Y REFACCIONES */}
-          <div className="bg-neutral-50 border-2 border-neutral-200 p-8 space-y-4 flex flex-col justify-between hover:border-black transition-colors">
-            <div className="space-y-4">
-              <div className="w-14 h-14 bg-red-600 text-white flex items-center justify-center font-bold">
-                <Settings size={28} />
-              </div>
-              <h2 className="text-2xl font-black uppercase text-gray-900">
-                4. Hospital de Lentes (Ajustes y Refacciones)
-              </h2>
-              <p className="text-gray-700 text-base leading-relaxed">
-                Ajustes, nivelación de varillas, cambio de plaquetas y reparación para tus lentes, según la disponibilidad de piezas para tu modelo.
-              </p>
-            </div>
-            <div className="pt-4 border-t border-neutral-200 text-xs text-yellow-800 font-mono flex items-center gap-2">
-              <AlertCircle size={16} className="shrink-0 text-yellow-700" />
-              <span>[PENDIENTE DE VALIDAR CON JUAN: Disponibilidad de refacciones específicas]</span>
-            </div>
-          </div>
-
-        </div>
-
-        {/* SECCION DE CONTACTO */}
-        <div className="bg-black text-white p-8 lg:p-12 flex flex-col lg:flex-row items-center justify-between gap-8">
-          <div className="space-y-2 text-center lg:text-left">
-            <h3 className="text-2xl font-black uppercase">¿Necesitas un ajuste o consulta sobre tus lentes?</h3>
-            <p className="text-neutral-300 text-base max-w-xl">
-              Visítanos en Plaza Dorada o escríbenos por WhatsApp para resolver tus dudas directamente.
-            </p>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-4 shrink-0 w-full lg:w-auto">
-            <a
-              href="https://wa.me/529999874504?text=Hola,%20quisiera%20consultar%20información%20sobre%20sus%20servicios%20ópticos%20en%20Plaza%20Dorada."
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={handleWhatsappClick}
-              className="bg-emerald-600 text-white text-center px-6 py-4 font-black uppercase text-sm flex items-center justify-center gap-2 hover:bg-emerald-700 transition-colors"
-            >
-              <MessageCircle size={20} />
-              Consultar por WhatsApp
-            </a>
-
-            <Link
-              href="/visitanos"
-              className="bg-white text-black text-center px-6 py-4 font-black uppercase text-sm flex items-center justify-center gap-2 hover:bg-neutral-200 transition-colors"
-            >
-              Visítanos en Plaza Dorada <ArrowRight size={20} />
-            </Link>
           </div>
         </div>
+      </section>
 
-      </div>
+      {/* GAMAS DE MICAS */}
+      <section className="py-20 sm:py-24 bg-neutral-50 border-y border-neutral-200">
+        <div className={`${container} space-y-14`}>
+          <SectionHeading
+            eyebrow="Micas"
+            title="No todas las micas son iguales"
+            text="Te explicamos las diferencias entre cada gama para que elijas con información."
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+            {micaRanges.map(({ name, text, recommended }, i) => (
+              <div
+                key={name}
+                className={`relative rounded-xl overflow-hidden p-8 space-y-4 ${
+                  recommended ? "bg-neutral-950 text-white" : "bg-white border border-neutral-200"
+                }`}
+              >
+                {recommended && (
+                  <span className="absolute top-0 right-0 bg-red-600 text-white text-[11px] font-semibold uppercase tracking-wider px-3 py-1.5 rounded-bl-lg">
+                    Recomendada
+                  </span>
+                )}
+                <span className={`text-sm font-semibold tabular-nums ${recommended ? "text-red-500" : "text-neutral-400"}`}>
+                  Gama 0{i + 1}
+                </span>
+                <h3 className="text-2xl font-semibold tracking-tight">{name}</h3>
+                <p className={`leading-relaxed ${recommended ? "text-neutral-300" : "text-neutral-600"}`}>{text}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* MARCAS DE MICAS Y TRATAMIENTOS */}
+          <div className="pt-6 space-y-8">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 border-b border-neutral-200 pb-6">
+              <h3 className="text-xl font-semibold tracking-tight text-neutral-900">Micas y tratamientos con respaldo</h3>
+              <p className="text-sm text-neutral-500 max-w-md">
+                Marcas de laboratorio reconocidas internacionalmente y laboratorios locales de Mérida.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {treatments.map(({ name, text }) => (
+                <div key={name} className="space-y-2">
+                  <h4 className="flex items-center gap-2 font-semibold text-neutral-900">
+                    <Check size={16} className="text-red-600 shrink-0" />
+                    {name}
+                  </h4>
+                  <p className="text-sm text-neutral-600 leading-relaxed">{text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ¿SABÍAS QUE? + FAQ */}
+      <section className="py-20 sm:py-24">
+        <div className={`${container} grid grid-cols-1 lg:grid-cols-12 gap-14`}>
+
+          <aside className="lg:col-span-5">
+            <div className="lg:sticky lg:top-36 border border-neutral-200 rounded-xl p-8 space-y-5">
+              <IconBox>
+                <Ruler size={20} />
+              </IconBox>
+              <h2 className="text-xl font-semibold tracking-tight text-neutral-900">
+                ¿Sabías que tus lentes deben tener una inclinación?
+              </h2>
+              <p className="text-neutral-600 leading-relaxed">
+                Se llama <strong className="text-neutral-900 font-semibold">ángulo pantoscópico</strong>: una ligera inclinación del armazón, de alrededor de 15 grados, que junto con la altura y distancia correctas permite que la mica trabaje como debe. Es clave para leer cómodamente con lentes progresivos.
+              </p>
+              <p className="text-neutral-600 leading-relaxed">
+                Por eso, después de colocar tus micas, ajustamos el armazón. Pregúntanos en tu visita.
+              </p>
+            </div>
+          </aside>
+
+          <div className="lg:col-span-7 space-y-8">
+            <SectionHeading eyebrow="Dudas comunes" title="Preguntas frecuentes" />
+            <div className="border-t border-neutral-900">
+              {faqs.map(({ q, a }) => (
+                <details key={q} className="group border-b border-neutral-200">
+                  <summary className="flex items-start justify-between gap-6 py-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden font-medium text-lg text-neutral-900 hover:text-red-600 transition-colors">
+                    {q}
+                    <Plus size={20} className="shrink-0 mt-1 text-neutral-400 transition-transform group-open:rotate-45" />
+                  </summary>
+                  <p className="pb-6 pr-10 text-neutral-600 leading-relaxed">{a}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <CtaBanner
+        title="¿Tienes dudas sobre tu vista o tus lentes?"
+        text="Visítanos en Plaza Dorada o escríbenos por WhatsApp. Te orientamos sin compromiso."
+        message="Hola, quisiera consultar información sobre sus servicios ópticos en Plaza Dorada."
+        location="servicios_page"
+      />
     </div>
   );
 }
