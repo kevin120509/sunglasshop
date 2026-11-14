@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 380" width="600" height="380">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3b82c4"/>
+      <stop offset="0.55" stop-color="#8ecbe8"/>
+      <stop offset="0.62" stop-color="#dff0f7"/>
+      <stop offset="0.68" stop-color="#b9d9c9"/>
+      <stop offset="1" stop-color="#7fb3a0"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d4d4d4"/>
+      <stop offset="1" stop-color="#a3a3a3"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Pantalla -->
+  <rect x="150" y="40" width="300" height="195" rx="10" fill="#1a1a1a"/>
+  <rect x="158" y="48" width="284" height="179" rx="6" fill="url(#sky)"/>
+  <circle cx="300" cy="95" r="16" fill="#ffffff" opacity="0.85"/>
+  <rect x="158" y="140" width="284" height="4" fill="#ffffff" opacity="0.4"/>
+  <path d="M158 190 Q 230 178 300 190 T 442 190 L 442 227 L 158 227 Z" fill="#ffffff" opacity="0.25"/>
+
+  <!-- Base -->
+  <path d="M120 235 L480 235 L505 262 Q 505 268 496 268 L 104 268 Q 95 268 95 262 Z" fill="url(#metal)"/>
+  <rect x="255" y="242" width="90" height="8" rx="4" fill="#8a8a8a" opacity="0.6"/>
+
+  <!-- Micas -->
+  <circle cx="150" cy="155" r="72" fill="#ffffff" fill-opacity="0.14" stroke="#ffffff" stroke-opacity="0.85" stroke-width="3"/>
+  <circle cx="450" cy="155" r="72" fill="#ffffff" fill-opacity="0.14" stroke="#ffffff" stroke-opacity="0.85" stroke-width="3"/>
+  <path d="M96 115 A 72 72 0 0 1 150 84" fill="none" stroke="#ffffff" stroke-opacity="0.5" stroke-width="8" stroke-linecap="round"/>
+  <path d="M396 115 A 72 72 0 0 1 450 84" fill="none" stroke="#ffffff" stroke-opacity="0.5" stroke-width="8" stroke-linecap="round"/>
+</svg>

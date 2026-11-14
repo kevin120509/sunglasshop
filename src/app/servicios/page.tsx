@@ -8,7 +8,8 @@ import {
   Ruler,
   Stethoscope,
   Plus,
-  Check
+  Check,
+  FileDown
 } from "lucide-react";
 import { SectionHeading, IconBox, PendingNote, CtaBanner } from "@/components/ui";
 
@@ -55,11 +56,35 @@ const micaRanges = [
   },
 ];
 
+const lensDesigns = [
+  {
+    name: "Monofocal",
+    text: "Corrige una sola distancia: lejos, cerca o intermedia. La opción más común para miopía, hipermetropía y astigmatismo.",
+  },
+  {
+    name: "Bifocal",
+    text: "Dos zonas en la misma mica: visión de lejos y de cerca. Útil cuando la vista cansada se suma a otra graduación.",
+  },
+  {
+    name: "Progresivo",
+    text: "Lejos, intermedio y cerca en una sola mica, con transición suave y sin línea visible. Recomendado para presbicia.",
+  },
+];
+
 const treatments = [
   { name: "Varilux · Essilor", text: "Micas progresivas de una de las marcas líderes a nivel mundial." },
   { name: "Kodak Lens", text: "Micas de alta calidad para resolver distintos problemas visuales." },
-  { name: "Transitions", text: "Tratamiento fotocromático: la mica se oscurece con el sol y se aclara en interiores." },
+  { name: "DEESIK Blue HD X6", text: "Micas con protección contra luz azul y antirreflejante con capa hidrofóbica fácil de limpiar.", brochure: "/folletos/folleto-micas-deesik-blue-hd-x6.pdf" },
+  { name: "Transitions Gen S · XTRAactive", text: "Fotocromáticos que se aclaran u oscurecen según la luz; el XTRAactive alcanza su tono más oscuro incluso dentro del auto.", brochure: "/folletos/folleto-lentes-transitions-gen-s.pdf" },
   { name: "Crizal", text: "Tratamiento antirreflejante que reduce reflejos y facilita la limpieza." },
+  { name: "MR-7 · MR-8", text: "Materiales de alto índice: micas más delgadas y ligeras, ideales para graduaciones altas." },
+];
+
+const deliveryChecks = [
+  "Medida y color del armazón adecuados a tu rostro y a tu graduación",
+  "Tipo y color de mica confirmados según tu pedido",
+  "Alineación correcta de las micas",
+  "Inclinación del armazón revisada de perfil",
 ];
 
 const faqs = [
@@ -183,16 +208,16 @@ export default function ServiciosPage() {
             ))}
           </div>
 
-          {/* MARCAS DE MICAS Y TRATAMIENTOS */}
+          {/* DISEÑOS DE MICA */}
           <div className="pt-6 space-y-8">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 border-b border-neutral-200 pb-6">
-              <h3 className="text-xl font-semibold tracking-tight text-neutral-900">Micas y tratamientos con respaldo</h3>
+              <h3 className="text-xl font-semibold tracking-tight text-neutral-900">Diseños según tu necesidad</h3>
               <p className="text-sm text-neutral-500 max-w-md">
-                Marcas de laboratorio reconocidas internacionalmente y laboratorios locales de Mérida.
+                El diseño correcto depende de tu edad y graduación. En el examen te decimos cuál te conviene.
               </p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {treatments.map(({ name, text }) => (
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+              {lensDesigns.map(({ name, text }) => (
                 <div key={name} className="space-y-2">
                   <h4 className="flex items-center gap-2 font-semibold text-neutral-900">
                     <Check size={16} className="text-red-600 shrink-0" />
@@ -202,6 +227,57 @@ export default function ServiciosPage() {
                 </div>
               ))}
             </div>
+          </div>
+
+          {/* MARCAS DE MICAS Y TRATAMIENTOS */}
+          <div className="pt-6 space-y-8">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 border-b border-neutral-200 pb-6">
+              <h3 className="text-xl font-semibold tracking-tight text-neutral-900">Micas y tratamientos con respaldo</h3>
+              <p className="text-sm text-neutral-500 max-w-md">
+                Marcas de laboratorio reconocidas internacionalmente y laboratorios locales de Mérida.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {treatments.map(({ name, text, brochure }) => (
+                <div key={name} className="space-y-2">
+                  <h4 className="flex items-center gap-2 font-semibold text-neutral-900">
+                    <Check size={16} className="text-red-600 shrink-0" />
+                    {name}
+                  </h4>
+                  <p className="text-sm text-neutral-600 leading-relaxed">{text}</p>
+                  {brochure && (
+                    <a
+                      href={brochure}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-2 inline-flex items-center gap-2 rounded-full bg-red-600 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white hover:bg-red-700 transition-colors"
+                    >
+                      <FileDown size={15} />
+                      Descargar folleto
+                    </a>
+                  )}
+                </div>
+              ))}
+            </div>
+            <PendingNote>Disponibilidad de marcas y líneas específicas de micas</PendingNote>
+          </div>
+
+          {/* REVISIÓN AL ENTREGAR */}
+          <div className="bg-neutral-50 border border-neutral-200 rounded-xl p-8 sm:p-10 space-y-6">
+            <div className="space-y-2">
+              <h3 className="text-xl font-semibold tracking-tight text-neutral-900">Antes de irte, revisamos el ajuste</h3>
+              <p className="text-sm text-neutral-500 max-w-2xl">
+                Al entregarte tus lentes verificamos cada punto para que la mica trabaje como debe.
+              </p>
+            </div>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
+              {deliveryChecks.map((item) => (
+                <li key={item} className="flex items-start gap-3 text-sm text-neutral-700">
+                  <Check size={16} className="text-red-600 shrink-0 mt-0.5" />
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>

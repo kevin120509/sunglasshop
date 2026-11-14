@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Lentes Transitions Gen S — Sunglass Shop Óptica</title>
+<style>
+  @page { size: letter; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+    color: #171717;
+    width: 216mm; height: 279mm;
+    display: flex; flex-direction: column;
+  }
+  .hero {
+    background: #0a0a0a; color: #fff;
+    padding: 12mm 20mm 0;
+    display: flex; align-items: flex-end; gap: 12mm;
+  }
+  .hero-text { flex: 1; padding-bottom: 10mm; }
+  .eyebrow {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 9pt; letter-spacing: .25em; text-transform: uppercase;
+    color: #a3a3a3; font-weight: 600; margin-bottom: 7mm;
+  }
+  .eyebrow::before { content: ""; width: 20px; height: 2px; background: #dc2626; }
+  h1 { font-size: 28pt; font-weight: 800; letter-spacing: -.02em; line-height: 1.05; }
+  h1 span { color: #dc2626; }
+  .hero p { margin-top: 5mm; font-size: 10.5pt; color: #a3a3a3; max-width: 105mm; line-height: 1.5; }
+  .hero img {
+    width: 56mm; height: 62mm; object-fit: cover; object-position: top;
+    border-radius: 3mm 3mm 0 0;
+  }
+  .body { padding: 9mm 20mm; flex: 1; }
+  h2 {
+    font-size: 13pt; font-weight: 700; letter-spacing: -.01em;
+    margin-bottom: 5mm; padding-bottom: 3mm; border-bottom: 1px solid #e5e5e5;
+  }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm 10mm; }
+  .item h3 { font-size: 10.5pt; font-weight: 700; margin-bottom: 1.5mm; }
+  .item h3::before { content: "✓ "; color: #dc2626; font-weight: 800; }
+  .item p { font-size: 9pt; color: #525252; line-height: 1.45; }
+  .lines { margin-top: 7mm; }
+  .line-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+  .line {
+    border: 1px solid #e5e5e5; border-radius: 4mm; overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .line.featured { background: #0a0a0a; color: #fff; border-color: #0a0a0a; }
+  .line img { width: 100%; height: 26mm; object-fit: cover; }
+  .line-body { padding: 5mm; }
+  .line h3 { font-size: 10.5pt; font-weight: 700; margin-bottom: 2mm; }
+  .line p { font-size: 8.5pt; color: #525252; line-height: 1.45; }
+  .line.featured p { color: #a3a3a3; }
+  .badge {
+    display: inline-block; background: #dc2626; color: #fff;
+    font-size: 7pt; font-weight: 700; letter-spacing: .15em; text-transform: uppercase;
+    padding: 1mm 2.5mm; border-radius: 2mm; margin-bottom: 2mm;
+  }
+  .badge.gray { background: #525252; }
+  .footer {
+    background: #0a0a0a; color: #fff;
+    padding: 8mm 20mm; display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer .brand { font-size: 12pt; font-weight: 800; }
+  .footer .brand span { color: #dc2626; }
+  .footer .contact { font-size: 8.5pt; color: #a3a3a3; line-height: 1.6; text-align: right; }
+  .note { font-size: 7.5pt; color: #a3a3a3; margin-top: 5mm; }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="hero-text">
+      <div class="eyebrow">Guía de lentes fotocromáticos</div>
+      <h1>Lentes <span>Transitions</span></h1>
+      <p>Se aclaran en interiores y se oscurecen con el sol, automáticamente. Un solo par de lentes para todos tus ambientes.</p>
+    </div>
+    <img src="../../public/folletos/img/transitions_hero.svg" alt="Lentes Transitions Gen S">
+  </div>
+
+  <div class="body">
+    <h2>Qué hacen por tus ojos</h2>
+    <div class="grid">
+      <div class="item">
+        <h3>Activación en segundos</h3>
+        <p>Responden ultra-rápido a la luz UV: se oscurecen al salir y se aclaran al entrar.</p>
+      </div>
+      <div class="item">
+        <h3>Bloqueo 100% UVA y UVB</h3>
+        <p>Protección solar completa, como un lente de sol graduado.</p>
+      </div>
+      <div class="item">
+        <h3>Filtro de luz azul-violeta</h3>
+        <p>También protegen de la luz dañina de pantallas, en interiores y exteriores.</p>
+      </div>
+      <div class="item">
+        <h3>Claros en interiores</h3>
+        <p>Se ven como un lente normal adentro; nadie nota que son fotocromáticos.</p>
+      </div>
+    </div>
+
+    <div class="lines">
+      <h2>Dos líneas, dos estilos</h2>
+      <div class="line-grid">
+        <div class="line featured">
+          <img src="../../public/folletos/img/transitions_colores.svg" alt="7 colores Transitions Gen S">
+          <div class="line-body">
+            <div class="badge">7 colores</div>
+            <h3>Transitions Gen S</h3>
+            <p>Para el uso diario: ultra-rápidos y disponibles en 7 colores vibrantes que se activan con el sol. Personaliza tu look sin cambiar de lentes.</p>
+          </div>
+        </div>
+        <div class="line">
+          <img src="../../public/folletos/img/transitions_xtra.svg" alt="Transitions XTRAactive">
+          <div class="line-body">
+            <div class="badge gray">Más oscuros</div>
+            <h3>Transitions XTRAactive</h3>
+            <p>Para quienes son muy sensibles a la luz: la mayor oscuridad, incluso dentro del automóvil. Color icónico gris, con opciones espejadas.</p>
+          </div>
+        </div>
+      </div>
+      <p class="note">Pregunta por los colores disponibles en tienda. También existen acabados Style Mirrors (espejados) para un look distinto.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="brand">Sunglass Shop <span>Óptica</span></div>
+    <div class="contact">
+      Plaza Dorada, Mérida · Calle 50 No. 143 x 15 y 19, Loc. 64<br>
+      Tel. 9999 874504 · WhatsApp 999 987 4504 · Lun–Sáb 11:00–20:00
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 340" width="800" height="340">
+  <rect width="800" height="340" fill="#f5f5f5"/>
+  <g font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#525252" text-anchor="middle" font-weight="600">
+
+    <!-- Rubí -->
+    <circle cx="130" cy="70" r="26" fill="#e8c1d2" stroke="#d4a8bd" stroke-width="1.5"/>
+    <circle cx="160" cy="70" r="26" fill="#a92c55"/>
+    <text x="145" y="118">Rubí</text>
+
+    <!-- Índigo -->
+    <circle cx="290" cy="70" r="26" fill="#b9c9e2" stroke="#9db1d6" stroke-width="1.5"/>
+    <circle cx="320" cy="70" r="26" fill="#3f5a8f"/>
+    <text x="305" y="118">Índigo</text>
+
+    <!-- Amatista -->
+    <circle cx="450" cy="70" r="26" fill="#cbb8dd" stroke="#b39ecb" stroke-width="1.5"/>
+    <circle cx="480" cy="70" r="26" fill="#6d4a8c"/>
+    <text x="465" y="118">Amatista</text>
+
+    <!-- Ámbar -->
+    <circle cx="610" cy="70" r="26" fill="#e2cba4" stroke="#d9b57a" stroke-width="1.5"/>
+    <circle cx="640" cy="70" r="26" fill="#a86f2a"/>
+    <text x="625" y="118">Ámbar</text>
+
+    <!-- Gris -->
+    <circle cx="200" cy="205" r="26" fill="#d4d4d8" stroke="#b5b5bd" stroke-width="1.5"/>
+    <circle cx="230" cy="205" r="26" fill="#3f3f46"/>
+    <text x="215" y="253">Gris</text>
+
+    <!-- Café -->
+    <circle cx="370" cy="205" r="26" fill="#ccb3a0" stroke="#b59177" stroke-width="1.5"/>
+    <circle cx="400" cy="205" r="26" fill="#5f4028"/>
+    <text x="385" y="253">Café</text>
+
+    <!-- Verde Grafito -->
+    <circle cx="540" cy="205" r="26" fill="#b8c8be" stroke="#9db3a5" stroke-width="1.5"/>
+    <circle cx="570" cy="205" r="26" fill="#44534a"/>
+    <text x="555" y="253">Verde Grafito</text>
+  </g>
+</svg>

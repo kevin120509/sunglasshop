@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 500" width="460" height="500">
+  <defs>
+    <linearGradient id="activa" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#dceaf2"/>
+      <stop offset="0.55" stop-color="#8fa8ba"/>
+      <stop offset="1" stop-color="#1f2937"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Sol -->
+  <circle cx="230" cy="90" r="36" fill="#facc15"/>
+  <g stroke="#facc15" stroke-width="5" stroke-linecap="round">
+    <line x1="230" y1="30" x2="230" y2="12"/>
+    <line x1="272" y1="48" x2="285" y2="35"/>
+    <line x1="290" y1="90" x2="308" y2="90"/>
+    <line x1="272" y1="132" x2="285" y2="145"/>
+    <line x1="188" y1="48" x2="175" y2="35"/>
+    <line x1="170" y1="90" x2="152" y2="90"/>
+    <line x1="188" y1="132" x2="175" y2="145"/>
+  </g>
+
+  <!-- Armazón wayfarer -->
+  <path d="M55 245 Q 55 225 90 225 L 370 225 Q 405 225 405 245" fill="none" stroke="#e5e5e5" stroke-width="10" stroke-linecap="round"/>
+  <path d="M70 235 L195 235 Q 205 235 205 250 L 200 330 Q 198 365 160 365 L 115 365 Q 78 365 74 330 L 68 250 Q 66 235 70 235 Z" fill="url(#activa)" stroke="#e5e5e5" stroke-width="7"/>
+  <path d="M265 235 L390 235 Q 394 235 392 250 L 386 330 Q 382 365 345 365 L 300 365 Q 262 365 260 330 L 255 250 Q 255 235 265 235 Z" fill="url(#activa)" stroke="#e5e5e5" stroke-width="7"/>
+  <path d="M205 250 Q 230 235 255 250" fill="none" stroke="#e5e5e5" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- Brillos -->
+  <path d="M95 255 L 130 315" stroke="#ffffff" stroke-opacity="0.55" stroke-width="9" stroke-linecap="round"/>
+  <path d="M290 255 L 325 315" stroke="#ffffff" stroke-opacity="0.35" stroke-width="9" stroke-linecap="round"/>
+
+  <!-- Etiqueta de activación -->
+  <text x="230" y="440" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#a3a3a3" letter-spacing="4">CLARO → OSCURO</text>
+  <path d="M165 455 L 295 455" stroke="#dc2626" stroke-width="3"/>
+  <path d="M295 455 L 283 447 M 295 455 L 283 463" stroke="#dc2626" stroke-width="3" fill="none"/>
+</svg>
