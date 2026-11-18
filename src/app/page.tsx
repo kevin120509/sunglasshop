@@ -9,9 +9,11 @@ import {
   Eye,
   ArrowRight,
   Layers,
-  Stethoscope
+  Stethoscope,
+  Clock
 } from "lucide-react";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
+import Reveal from "@/components/Reveal";
 import {
   WHATSAPP_URL,
   Eyebrow,
@@ -84,9 +86,11 @@ export default function Home() {
 
           {/* TEXTO */}
           <div className="lg:col-span-7 space-y-8">
-            <Eyebrow light>Plaza Dorada · Mérida, Yucatán</Eyebrow>
+            <div className="animate-fade-up">
+              <Eyebrow light>Plaza Dorada · Mérida, Yucatán</Eyebrow>
+            </div>
 
-            <div className="space-y-6">
+            <div className="space-y-6 animate-fade-up animate-delay-100">
               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.02]">
                 Sunglass Shop <span className="text-red-600">Óptica</span>
               </h1>
@@ -98,7 +102,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex flex-col sm:flex-row gap-3 animate-fade-up animate-delay-200">
               <Link href="/visitanos" onClick={handleDirectionsClick} className={btnPrimary}>
                 <MapPin size={18} /> Cómo llegar
               </Link>
@@ -118,7 +122,7 @@ export default function Home() {
           </div>
 
           {/* TARJETA DEL LOCAL */}
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-5 animate-fade-up animate-delay-300">
             <div className="border border-white/10 bg-white/[0.03] rounded-2xl overflow-hidden">
               <div className="flex items-center justify-center px-8 py-16 border-b border-white/10">
                 <Image
@@ -138,6 +142,14 @@ export default function Home() {
                     <strong className="block text-white font-semibold text-base">Plaza Dorada, Local 64</strong>
                     <span className="block text-neutral-400">Calle 50 No. 143 x 15 y 19, Nueva Hidalgo</span>
                     <span className="block text-neutral-500">Entrada 3 por Soriana</span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <Clock size={18} className="text-red-500 shrink-0 mt-0.5" />
+                  <div className="space-y-1 text-sm">
+                    <strong className="block text-white font-semibold text-base">Lunes a sábado</strong>
+                    <span className="block text-neutral-400">11:00 a 20:00 h</span>
                   </div>
                 </div>
 
@@ -169,30 +181,34 @@ export default function Home() {
             {steps.map(({ icon: Icon, title, text }, i) => (
               <li
                 key={title}
-                className="pt-8 pb-10 md:pr-10 md:[&:not(:first-child)]:pl-10 md:[&:not(:first-child)]:border-l border-neutral-200 space-y-5 border-b md:border-b-0"
+                className="pt-8 pb-10 md:pr-10 md:[&:not(:first-child)]:pl-10 md:[&:not(:first-child)]:border-l border-neutral-200 border-b md:border-b-0"
               >
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-semibold text-red-600 tabular-nums">0{i + 1}</span>
-                  <Icon size={22} className="text-neutral-400" />
-                </div>
-                <h3 className="text-xl font-semibold tracking-tight text-neutral-900">{title}</h3>
-                <p className="text-neutral-600 leading-relaxed">{text}</p>
+                <Reveal delay={i * 120} className="space-y-5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-semibold text-red-600 tabular-nums">0{i + 1}</span>
+                    <Icon size={22} className="text-neutral-400" />
+                  </div>
+                  <h3 className="text-xl font-semibold tracking-tight text-neutral-900">{title}</h3>
+                  <p className="text-neutral-600 leading-relaxed">{text}</p>
+                </Reveal>
               </li>
             ))}
           </ol>
 
           {/* ALCANCE HONESTO */}
-          <div className="bg-neutral-50 border-l-2 border-red-600 rounded-r-xl p-8 sm:p-10 flex flex-col sm:flex-row gap-6">
-            <IconBox accent>
-              <Stethoscope size={20} />
-            </IconBox>
-            <div className="space-y-2">
-              <h3 className="text-lg font-semibold text-neutral-900">Te decimos con honestidad qué podemos resolver</h3>
-              <p className="text-neutral-600 leading-relaxed max-w-3xl">
-                Corregimos la agudeza visual: miopía, hipermetropía, astigmatismo y presbicia (vista cansada). Condiciones como cataratas, glaucoma o complicaciones visuales por diabetes o hipertensión deben ser atendidas por un médico oftalmólogo, y así te lo indicaremos.
-              </p>
+          <Reveal delay={100}>
+            <div className="bg-neutral-50 border-l-2 border-red-600 rounded-r-xl p-8 sm:p-10 flex flex-col sm:flex-row gap-6">
+              <IconBox accent>
+                <Stethoscope size={20} />
+              </IconBox>
+              <div className="space-y-2">
+                <h3 className="text-lg font-semibold text-neutral-900">Te decimos con honestidad qué podemos resolver</h3>
+                <p className="text-neutral-600 leading-relaxed max-w-3xl">
+                  Corregimos la agudeza visual: miopía, hipermetropía, astigmatismo y presbicia (vista cansada). Condiciones como cataratas, glaucoma o complicaciones visuales por diabetes o hipertensión deben ser atendidas por un médico oftalmólogo, y así te lo indicaremos.
+                </p>
+              </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -205,12 +221,12 @@ export default function Home() {
           />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {sections.map(({ icon: Icon, title, text, href, cta, event, accent }) => (
-              <Link
-                key={href}
+            {sections.map(({ icon: Icon, title, text, href, cta, event, accent }, i) => (
+              <Reveal key={href} delay={i * 120}>
+                <Link
                 href={href}
                 onClick={() => trackEvent(event, { location: "home_card" })}
-                className={`group bg-white border rounded-xl p-8 flex flex-col justify-between gap-10 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-neutral-900/5 ${
+                className={`group bg-white border rounded-xl p-8 flex flex-col justify-between gap-10 h-full transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-neutral-900/5 ${
                   accent ? "border-red-600" : "border-neutral-200 hover:border-neutral-900"
                 }`}
               >
@@ -229,7 +245,8 @@ export default function Home() {
                   {cta}
                   <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
                 </span>
-              </Link>
+                </Link>
+              </Reveal>
             ))}
           </div>
         </div>

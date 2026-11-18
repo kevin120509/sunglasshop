@@ -9,6 +9,7 @@ import {
   Gem
 } from "lucide-react";
 import { Eyebrow, SectionHeading, IconBox, PendingNote, CtaBanner } from "@/components/ui";
+import Reveal from "@/components/Reveal";
 
 const categories = [
   {
@@ -53,20 +54,20 @@ const trends = [
 ];
 
 const brands = [
-  "Ray-Ban",
-  "Oakley",
-  "Tommy Hilfiger",
-  "Michael Kors",
-  "Vogue",
-  "Coach",
-  "Guess",
-  "Armani Exchange",
-  "Arnette",
-  "Montblanc",
-  "Prada",
-  "Burberry",
-  "Carolina Herrera",
-  "Ralph Lauren",
+  { name: "Ray-Ban", logo: "/images/marcas/ray-ban.svg" },
+  { name: "Oakley", logo: "/images/marcas/oakley.svg" },
+  { name: "Tommy Hilfiger", logo: "/images/marcas/tommy-hilfiger.svg" },
+  { name: "Michael Kors", logo: "/images/marcas/michael-kors.svg" },
+  { name: "Vogue", logo: "/images/marcas/vogue.svg" },
+  { name: "Coach", logo: "/images/marcas/coach.svg" },
+  { name: "Guess", logo: "/images/marcas/guess.svg" },
+  { name: "Armani Exchange", logo: "/images/marcas/armani-exchange.svg" },
+  { name: "Arnette", logo: "/images/marcas/arnette.svg" },
+  { name: "Montblanc", logo: "/images/marcas/montblanc.svg" },
+  { name: "Prada", logo: "/images/marcas/prada.svg" },
+  { name: "Burberry", logo: "/images/marcas/burberry.svg" },
+  { name: "Carolina Herrera", logo: "/images/marcas/carolina-herrera.svg" },
+  { name: "Ralph Lauren", logo: "/images/marcas/ralph-lauren.svg" },
 ];
 
 const container = "max-w-6xl mx-auto px-5 sm:px-6";
@@ -86,10 +87,10 @@ export default function LentesPage() {
           />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {categories.map(({ icon: Icon, title, text, tag, accent }) => (
+            {categories.map(({ icon: Icon, title, text, tag, accent }, i) => (
+              <Reveal key={title} delay={i * 100} className="h-full">
               <div
-                key={title}
-                className="group border border-neutral-200 rounded-xl p-7 flex flex-col justify-between gap-8 transition-colors hover:border-neutral-900"
+                className="group border border-neutral-200 rounded-xl p-7 flex flex-col justify-between gap-8 h-full transition-colors hover:border-neutral-900"
               >
                 <div className="space-y-5">
                   <IconBox accent={accent}>
@@ -103,6 +104,7 @@ export default function LentesPage() {
                   {tag}
                 </p>
               </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -118,8 +120,9 @@ export default function LentesPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/10 border border-white/10 rounded-xl overflow-hidden">
-            {trends.map(({ icon: Icon, title, text, pending }) => (
-              <div key={title} className="bg-neutral-950 p-8 sm:p-10 flex flex-col justify-between gap-8">
+            {trends.map(({ icon: Icon, title, text, pending }, i) => (
+              <Reveal key={title} delay={i * 120} className="h-full">
+              <div className="bg-neutral-950 p-8 sm:p-10 flex flex-col justify-between gap-8 h-full">
                 <div className="space-y-5">
                   <IconBox accent>
                     <Icon size={20} />
@@ -129,6 +132,7 @@ export default function LentesPage() {
                 </div>
                 {pending && <PendingNote dark>{pending}</PendingNote>}
               </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -149,10 +153,19 @@ export default function LentesPage() {
           <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 border-t border-l border-neutral-200 rounded-xl overflow-hidden">
             {brands.map((brand) => (
               <li
-                key={brand}
-                className="border-r border-b border-neutral-200 h-20 px-3 flex items-center justify-center text-center text-sm font-semibold tracking-tight text-neutral-500 hover:text-neutral-900 hover:bg-neutral-50 transition-colors"
+                key={brand.name}
+                className="border-r border-b border-neutral-200 h-24 px-3 flex flex-col items-center justify-center gap-2 text-center hover:bg-neutral-50 transition-colors"
               >
-                {brand}
+                <span className="text-sm font-semibold tracking-tight text-neutral-500">
+                  {brand.name}
+                </span>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={brand.logo}
+                  alt={brand.name}
+                  loading="lazy"
+                  className="h-6 max-w-[80%] object-contain"
+                />
               </li>
             ))}
           </ul>

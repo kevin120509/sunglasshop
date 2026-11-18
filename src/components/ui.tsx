@@ -57,7 +57,7 @@ export function SectionHeading({
 export function IconBox({ children, accent }: { children: React.ReactNode; accent?: boolean }) {
   return (
     <div
-      className={`w-11 h-11 flex items-center justify-center shrink-0 text-white rounded-lg ${
+      className={`w-11 h-11 flex items-center justify-center shrink-0 text-white rounded-lg transition-transform duration-300 group-hover:scale-105 ${
         accent ? "bg-red-600" : "bg-neutral-900"
       }`}
     >

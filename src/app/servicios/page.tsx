@@ -9,9 +9,19 @@ import {
   Stethoscope,
   Plus,
   Check,
-  FileDown
+  FileDown,
+  Focus,
+  Split,
+  Waves,
+  Award,
+  Camera,
+  MonitorSmartphone,
+  SunMoon,
+  Feather,
+  ClipboardCheck
 } from "lucide-react";
 import { SectionHeading, IconBox, PendingNote, CtaBanner } from "@/components/ui";
+import Reveal from "@/components/Reveal";
 
 const services = [
   {
@@ -58,26 +68,29 @@ const micaRanges = [
 
 const lensDesigns = [
   {
+    icon: Focus,
     name: "Monofocal",
     text: "Corrige una sola distancia: lejos, cerca o intermedia. La opción más común para miopía, hipermetropía y astigmatismo.",
   },
   {
+    icon: Split,
     name: "Bifocal",
     text: "Dos zonas en la misma mica: visión de lejos y de cerca. Útil cuando la vista cansada se suma a otra graduación.",
   },
   {
+    icon: Waves,
     name: "Progresivo",
     text: "Lejos, intermedio y cerca en una sola mica, con transición suave y sin línea visible. Recomendado para presbicia.",
   },
 ];
 
 const treatments = [
-  { name: "Varilux · Essilor", text: "Micas progresivas de una de las marcas líderes a nivel mundial." },
-  { name: "Kodak Lens", text: "Micas de alta calidad para resolver distintos problemas visuales." },
-  { name: "DEESIK Blue HD X6", text: "Micas con protección contra luz azul y antirreflejante con capa hidrofóbica fácil de limpiar.", brochure: "/folletos/folleto-micas-deesik-blue-hd-x6.pdf" },
-  { name: "Transitions Gen S · XTRAactive", text: "Fotocromáticos que se aclaran u oscurecen según la luz; el XTRAactive alcanza su tono más oscuro incluso dentro del auto.", brochure: "/folletos/folleto-lentes-transitions-gen-s.pdf" },
-  { name: "Crizal", text: "Tratamiento antirreflejante que reduce reflejos y facilita la limpieza." },
-  { name: "MR-7 · MR-8", text: "Materiales de alto índice: micas más delgadas y ligeras, ideales para graduaciones altas." },
+  { icon: Award, name: "Varilux · Essilor", text: "Micas progresivas de una de las marcas líderes a nivel mundial." },
+  { icon: Camera, name: "Kodak Lens", text: "Micas de alta calidad para resolver distintos problemas visuales." },
+  { icon: MonitorSmartphone, name: "DEESIK Blue HD X6", text: "Micas con protección contra luz azul y antirreflejante con capa hidrofóbica fácil de limpiar.", brochure: "/folletos/folleto-micas-deesik-blue-hd-x6.pdf" },
+  { icon: SunMoon, name: "Transitions Gen S · XTRAactive", text: "Fotocromáticos que se aclaran u oscurecen según la luz; el XTRAactive alcanza su tono más oscuro incluso dentro del auto.", brochure: "/folletos/folleto-lentes-transitions-gen-s.pdf" },
+  { icon: Sparkles, name: "Crizal", text: "Tratamiento antirreflejante que reduce reflejos y facilita la limpieza." },
+  { icon: Feather, name: "MR-7 · MR-8", text: "Materiales de alto índice: micas más delgadas y ligeras, ideales para graduaciones altas." },
 ];
 
 const deliveryChecks = [
@@ -142,7 +155,8 @@ export default function ServiciosPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-neutral-200 border border-neutral-200 rounded-xl overflow-hidden">
             {services.map(({ icon: Icon, title, text, note, pending }, i) => (
-              <div key={title} className="bg-white p-8 sm:p-10 flex flex-col justify-between gap-8">
+              <Reveal key={title} delay={i * 100} className="h-full">
+              <div className="bg-white p-8 sm:p-10 flex flex-col justify-between gap-8 h-full">
                 <div className="space-y-5">
                   <div className="flex items-center justify-between">
                     <IconBox accent={!!pending}>
@@ -159,10 +173,12 @@ export default function ServiciosPage() {
                   <p className="text-xs font-medium uppercase tracking-wider text-neutral-400">{note}</p>
                 )}
               </div>
+              </Reveal>
             ))}
           </div>
 
           {/* ALCANCE HONESTO */}
+          <Reveal delay={100}>
           <div className="bg-neutral-950 text-white rounded-xl p-8 sm:p-10 flex flex-col sm:flex-row gap-6">
             <IconBox accent>
               <Stethoscope size={20} />
@@ -174,6 +190,7 @@ export default function ServiciosPage() {
               </p>
             </div>
           </div>
+          </Reveal>
         </div>
       </section>
 
@@ -188,9 +205,9 @@ export default function ServiciosPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
             {micaRanges.map(({ name, text, recommended }, i) => (
+              <Reveal key={name} delay={i * 120} className="h-full">
               <div
-                key={name}
-                className={`relative rounded-xl overflow-hidden p-8 space-y-4 ${
+                className={`relative rounded-xl overflow-hidden p-8 space-y-4 h-full ${
                   recommended ? "bg-neutral-950 text-white" : "bg-white border border-neutral-200"
                 }`}
               >
@@ -205,6 +222,7 @@ export default function ServiciosPage() {
                 <h3 className="text-2xl font-semibold tracking-tight">{name}</h3>
                 <p className={`leading-relaxed ${recommended ? "text-neutral-300" : "text-neutral-600"}`}>{text}</p>
               </div>
+              </Reveal>
             ))}
           </div>
 
@@ -217,14 +235,16 @@ export default function ServiciosPage() {
               </p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-              {lensDesigns.map(({ name, text }) => (
-                <div key={name} className="space-y-2">
-                  <h4 className="flex items-center gap-2 font-semibold text-neutral-900">
-                    <Check size={16} className="text-red-600 shrink-0" />
-                    {name}
-                  </h4>
+              {lensDesigns.map(({ icon: Icon, name, text }, i) => (
+                <Reveal key={name} delay={i * 100}>
+                <div className="space-y-3">
+                  <IconBox>
+                    <Icon size={18} />
+                  </IconBox>
+                  <h4 className="font-semibold text-neutral-900">{name}</h4>
                   <p className="text-sm text-neutral-600 leading-relaxed">{text}</p>
                 </div>
+                </Reveal>
               ))}
             </div>
           </div>
@@ -238,10 +258,10 @@ export default function ServiciosPage() {
               </p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {treatments.map(({ name, text, brochure }) => (
+              {treatments.map(({ icon: Icon, name, text, brochure }) => (
                 <div key={name} className="space-y-2">
                   <h4 className="flex items-center gap-2 font-semibold text-neutral-900">
-                    <Check size={16} className="text-red-600 shrink-0" />
+                    <Icon size={16} className="text-red-600 shrink-0" />
                     {name}
                   </h4>
                   <p className="text-sm text-neutral-600 leading-relaxed">{text}</p>
@@ -264,11 +284,16 @@ export default function ServiciosPage() {
 
           {/* REVISIÓN AL ENTREGAR */}
           <div className="bg-neutral-50 border border-neutral-200 rounded-xl p-8 sm:p-10 space-y-6">
-            <div className="space-y-2">
-              <h3 className="text-xl font-semibold tracking-tight text-neutral-900">Antes de irte, revisamos el ajuste</h3>
-              <p className="text-sm text-neutral-500 max-w-2xl">
-                Al entregarte tus lentes verificamos cada punto para que la mica trabaje como debe.
-              </p>
+            <div className="flex items-start gap-5">
+              <IconBox>
+                <ClipboardCheck size={20} />
+              </IconBox>
+              <div className="space-y-2">
+                <h3 className="text-xl font-semibold tracking-tight text-neutral-900">Antes de irte, revisamos el ajuste</h3>
+                <p className="text-sm text-neutral-500 max-w-2xl">
+                  Al entregarte tus lentes verificamos cada punto para que la mica trabaje como debe.
+                </p>
+              </div>
             </div>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
               {deliveryChecks.map((item) => (

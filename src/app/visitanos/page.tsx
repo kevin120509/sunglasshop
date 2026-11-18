@@ -10,6 +10,7 @@ import {
   Info
 } from "lucide-react";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
+import Reveal from "@/components/Reveal";
 import {
   WHATSAPP_URL,
   SectionHeading,
@@ -58,7 +59,8 @@ export default function VisitanosPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
           {/* DATOS DEL LOCAL */}
-          <div className="lg:col-span-6 bg-neutral-950 text-white rounded-xl overflow-hidden">
+          <Reveal className="lg:col-span-6">
+          <div className="bg-neutral-950 text-white rounded-xl overflow-hidden h-full">
             <div className="p-8 sm:p-10 space-y-8">
               <div className="space-y-1">
                 <h2 className="text-2xl font-semibold tracking-tight">Sunglass Shop Óptica</h2>
@@ -107,9 +109,11 @@ export default function VisitanosPage() {
               </div>
             </div>
           </div>
+          </Reveal>
 
           {/* CÓMO LLEGAR */}
-          <div className="lg:col-span-6 border border-neutral-200 rounded-xl overflow-hidden">
+          <Reveal delay={120} className="lg:col-span-6">
+          <div className="border border-neutral-200 rounded-xl overflow-hidden h-full">
             <div className="bg-neutral-950 flex items-center justify-center px-10 py-20">
               <Image
                 src="/images/logo_sunglass_shop.png"
@@ -142,6 +146,7 @@ export default function VisitanosPage() {
               </ul>
             </div>
           </div>
+          </Reveal>
 
         </div>
       </div>
