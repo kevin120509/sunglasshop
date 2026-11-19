@@ -141,14 +141,18 @@ export default function Home() {
       <section className="hidden md:flex relative bg-neutral-950 text-white overflow-hidden min-h-[820px] lg:min-h-[760px] flex-col">
         <div className="absolute inset-x-0 bottom-0 h-px bg-red-600 z-20" />
 
-        <Image
-          src="/images/local-fachada-hero.jpg"
-          alt="Interior de Sunglass Shop Óptica en Plaza Dorada, Mérida"
-          fill
-          sizes="100vw"
-          className="object-cover object-[center_30%]"
-          priority
-        />
+        {/* La foto se limita a un ancho máximo para que en monitores muy anchos
+            no se vea forzada a recortarse verticalmente hasta perder el local. */}
+        <div className="absolute inset-y-0 left-1/2 w-full max-w-[1536px] -translate-x-1/2">
+          <Image
+            src="/images/local-fachada-hero.jpg"
+            alt="Interior de Sunglass Shop Óptica en Plaza Dorada, Mérida"
+            fill
+            sizes="1536px"
+            className="object-cover object-[center_30%]"
+            priority
+          />
+        </div>
         <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-neutral-950 via-neutral-950/85 to-transparent" />
 
         <div className="relative z-10 flex flex-col flex-1 max-w-6xl mx-auto w-full px-5 sm:px-6 py-10 lg:py-14">
