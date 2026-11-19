@@ -79,8 +79,8 @@ export default function Home() {
   return (
     <div className="flex flex-col">
 
-      {/* 1. HERO: foto real de fondo */}
-      <section className="relative bg-neutral-950 text-white overflow-hidden min-h-[600px] lg:min-h-[680px] flex flex-col">
+      {/* 1. HERO: foto real de fondo, clara arriba, información abajo */}
+      <section className="relative bg-neutral-950 text-white overflow-hidden min-h-[820px] lg:min-h-[760px] flex flex-col">
         <div className="absolute inset-x-0 bottom-0 h-px bg-red-600 z-20" />
 
         <Image
@@ -88,17 +88,17 @@ export default function Home() {
           alt="Interior de Sunglass Shop Óptica en Plaza Dorada, Mérida"
           fill
           sizes="100vw"
-          className="object-cover object-[center_25%]"
+          className="object-cover object-[center_30%]"
           priority
         />
-        <div className="absolute inset-0 bg-neutral-950/60" />
-        <div className="absolute inset-0 bg-gradient-to-r from-neutral-950 via-neutral-950/75 to-neutral-950/20" />
-        <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-neutral-950 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-neutral-950 via-neutral-950/85 to-transparent" />
 
-        <div className="relative z-10 flex flex-col flex-1 max-w-6xl mx-auto w-full px-5 sm:px-6 py-14 lg:py-20">
+        <div className="relative z-10 flex flex-col flex-1 max-w-6xl mx-auto w-full px-5 sm:px-6 py-10 lg:py-14">
           <h1 className="sr-only">Sunglass Shop Óptica</h1>
 
-          <div className="space-y-5 max-w-xl animate-fade-up animate-delay-100">
+          <div className="flex-1" />
+
+          <div className="space-y-5 max-w-xl animate-fade-up animate-delay-100 drop-shadow-[0_3px_14px_rgba(0,0,0,0.9)]">
             <Eyebrow light>Plaza Dorada · Mérida, Yucatán</Eyebrow>
             <p className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.08] text-pretty">
               Examen de la vista, micas de calidad y orientación honesta.
@@ -126,7 +126,7 @@ export default function Home() {
             </a>
           </div>
 
-          <div className="mt-auto pt-10 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-8 text-sm animate-fade-up animate-delay-300">
+          <div className="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-8 text-sm animate-fade-up animate-delay-300">
             <div className="flex items-start gap-2">
               <MapPin size={16} className="text-red-500 shrink-0 mt-0.5" />
               <span className="text-neutral-200">Plaza Dorada, Local 64 · Entrada 3 por Soriana</span>
