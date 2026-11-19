@@ -86,26 +86,17 @@ const lensDesigns = [
 
 const treatments = [
   { icon: Award, name: "Varilux · Essilor", text: "Micas progresivas de una de las marcas líderes a nivel mundial." },
-  {
-    icon: Camera,
-    name: "Kodak Lens",
-    text: "Micas de alta calidad para resolver distintos problemas visuales.",
-    videos: [
-      { src: "/videos/kodak-esto-cambia-todo.mp4", poster: "/images/videos/poster-kodak-esto-cambia-todo.jpg", label: "Esto lo cambia todo" },
-      { src: "/videos/kodak-infinite.mp4", poster: "/images/videos/poster-kodak-infinite.jpg", label: "Vision First Infinite" },
-    ],
-  },
+  { icon: Camera, name: "Kodak Lens", text: "Micas de alta calidad para resolver distintos problemas visuales." },
   { icon: MonitorSmartphone, name: "DEESIK Blue HD X6", text: "Micas con protección contra luz azul y antirreflejante con capa hidrofóbica fácil de limpiar.", brochure: "/folletos/folleto-micas-deesik-blue-hd-x6.pdf" },
   { icon: SunMoon, name: "Transitions Gen S · XTRAactive", text: "Fotocromáticos que se aclaran u oscurecen según la luz; el XTRAactive alcanza su tono más oscuro incluso dentro del auto.", brochure: "/folletos/folleto-lentes-transitions-gen-s.pdf" },
-  {
-    icon: Sparkles,
-    name: "Crizal",
-    text: "Tratamiento antirreflejante que reduce reflejos y facilita la limpieza.",
-    videos: [
-      { src: "/videos/crizal.mp4", poster: "/images/videos/poster-crizal.jpg", label: "Lentes Crizal · Essilor" },
-    ],
-  },
+  { icon: Sparkles, name: "Crizal", text: "Tratamiento antirreflejante que reduce reflejos y facilita la limpieza." },
   { icon: Feather, name: "MR-7 · MR-8", text: "Materiales de alto índice: micas más delgadas y ligeras, ideales para graduaciones altas." },
+];
+
+const brandVideos = [
+  { brand: "Kodak Lens", label: "Esto lo cambia todo", src: "/videos/kodak-esto-cambia-todo.mp4", poster: "/images/videos/poster-kodak-esto-cambia-todo.jpg" },
+  { brand: "Kodak Lens", label: "Vision First Infinite", src: "/videos/kodak-infinite.mp4", poster: "/images/videos/poster-kodak-infinite.jpg" },
+  { brand: "Crizal · Essilor", label: "Resisten casi todos los tests", src: "/videos/crizal.mp4", poster: "/images/videos/poster-crizal.jpg" },
 ];
 
 const deliveryChecks = [
@@ -273,7 +264,7 @@ export default function ServiciosPage() {
               </p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {treatments.map(({ icon: Icon, name, text, brochure, videos }) => (
+              {treatments.map(({ icon: Icon, name, text, brochure }) => (
                 <div key={name} className="space-y-2">
                   <h4 className="flex items-center gap-2 font-semibold text-neutral-900">
                     <Icon size={16} className="text-red-600 shrink-0" />
@@ -291,27 +282,38 @@ export default function ServiciosPage() {
                       Descargar folleto
                     </a>
                   )}
-                  {videos && (
-                    <div className="mt-3 space-y-3">
-                      {videos.map((v) => (
-                        <div key={v.src} className="space-y-1.5">
-                          <video
-                            controls
-                            preload="none"
-                            poster={v.poster}
-                            className="w-full aspect-video rounded-lg bg-neutral-900"
-                          >
-                            <source src={v.src} type="video/mp4" />
-                          </video>
-                          <span className="block text-xs text-neutral-500">{v.label}</span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
                 </div>
               ))}
             </div>
             <PendingNote>Disponibilidad de marcas y líneas específicas de micas</PendingNote>
+          </div>
+
+          {/* VIDEOS DE MARCA */}
+          <div className="pt-6 space-y-8">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 border-b border-neutral-200 pb-6">
+              <h3 className="text-xl font-semibold tracking-tight text-neutral-900">Conócelas en video</h3>
+              <p className="text-sm text-neutral-500 max-w-md">
+                Material oficial de Kodak Lens y Crizal · Essilor.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {brandVideos.map((v) => (
+                <div key={v.src} className="space-y-2">
+                  <video
+                    controls
+                    preload="none"
+                    poster={v.poster}
+                    className="w-full aspect-video rounded-lg bg-neutral-900"
+                  >
+                    <source src={v.src} type="video/mp4" />
+                  </video>
+                  <div className="space-y-0.5">
+                    <h4 className="text-sm font-semibold text-neutral-900">{v.brand}</h4>
+                    <span className="block text-xs text-neutral-500">{v.label}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* REVISIÓN AL ENTREGAR */}
