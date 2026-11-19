@@ -66,8 +66,10 @@ Desarrollado por **CODIA** para el Señor Juan.
 | Logos de marcas | `images/marcas/` — 14 SVGs |
 | Folletos PDF | `folletos/folleto-lentes-transitions-gen-s.pdf`, `folletos/folleto-micas-deesik-blue-hd-x6.pdf` |
 | Ilustraciones folletos | `folletos/img/` — 6 SVGs |
+| Foto del local | `images/local-fachada.jpg` — usada en el hero de `/` |
+| Videos de marca | `videos/crizal.mp4`, `videos/kodak-infinite.mp4`, `videos/kodak-esto-cambia-todo.mp4` + posters en `images/videos/` — usados en `/servicios` |
 
-> Las fotos reales del local están en `assets/fotos_local/` (fuera de `/public`) y aún no se usan en el sitio.
+> Los originales sin comprimir (fotos y videos tal como los entregó Juan) viven en `assets/` (fuera de `/public`, ignorado por git). Las versiones en `/public` son copias optimizadas con `sharp`/`ffmpeg` para web.
 
 ---
 
@@ -91,7 +93,6 @@ Los siguientes datos están marcados con `[PENDIENTE DE VALIDAR CON JUAN]` en el
 |-----------|-------------|
 | 🔴 Alta | GA4 y Meta Pixel no tienen scripts de carga — `analytics.ts` llama `window.gtag`/`window.fbq` pero los IDs nunca se inyectan en `layout.tsx` |
 | 🔴 Alta | Schema.org lista "Sunday" como día de apertura pero el horario real es lunes a sábado |
-| 🔴 Alta | Fotos del local en `assets/fotos_local/` nunca se usan — mover a `public/images/` e integrar |
 | 🟡 Media | Link de Google Maps en `/visitanos` es búsqueda genérica, no pin exacto del local |
 | 🟡 Media | `logo_sunglass_shop_blanco.png` se carga en el Header sobre fondo blanco — revisar versión correcta |
 | 🟢 Baja | SVGs default de Next.js en `/public` sin usar: `file.svg`, `globe.svg`, `next.svg`, `vercel.svg`, `window.svg` |
