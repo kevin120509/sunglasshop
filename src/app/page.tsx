@@ -79,91 +79,63 @@ export default function Home() {
   return (
     <div className="flex flex-col">
 
-      {/* 1. HERO */}
-      <section className="relative bg-neutral-950 text-white overflow-hidden">
-        <div className="absolute inset-x-0 bottom-0 h-px bg-red-600" />
-        <div className="max-w-6xl mx-auto px-5 sm:px-6 py-20 lg:py-28 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-x-14 lg:gap-y-10 items-start">
+      {/* 1. HERO: foto real de fondo */}
+      <section className="relative bg-neutral-950 text-white overflow-hidden min-h-[600px] lg:min-h-[680px] flex flex-col">
+        <div className="absolute inset-x-0 bottom-0 h-px bg-red-600 z-20" />
 
-          {/* COPY */}
-          <div className="lg:col-span-7 space-y-6 animate-fade-up animate-delay-100">
+        <Image
+          src="/images/local-fachada-hero.jpg"
+          alt="Interior de Sunglass Shop Óptica en Plaza Dorada, Mérida"
+          fill
+          sizes="100vw"
+          className="object-cover object-[center_25%]"
+          priority
+        />
+        <div className="absolute inset-0 bg-neutral-950/60" />
+        <div className="absolute inset-0 bg-gradient-to-r from-neutral-950 via-neutral-950/75 to-neutral-950/20" />
+        <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-neutral-950 to-transparent" />
+
+        <div className="relative z-10 flex flex-col flex-1 max-w-6xl mx-auto w-full px-5 sm:px-6 py-14 lg:py-20">
+          <h1 className="sr-only">Sunglass Shop Óptica</h1>
+
+          <div className="space-y-5 max-w-xl animate-fade-up animate-delay-100">
             <Eyebrow light>Plaza Dorada · Mérida, Yucatán</Eyebrow>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.02]">
-              Sunglass Shop <span className="text-red-600">Óptica</span>
-            </h1>
-            <p className="text-xl sm:text-2xl text-neutral-200 leading-snug max-w-xl text-pretty">
+            <p className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.08] text-pretty">
               Examen de la vista, micas de calidad y orientación honesta.
             </p>
-            <p className="text-base text-neutral-400 leading-relaxed max-w-lg">
+            <p className="text-base sm:text-lg text-neutral-300 leading-relaxed max-w-md">
               Primero resolvemos cómo ves. Después te ayudamos a elegir la mica y el armazón adecuados para ti.
             </p>
           </div>
 
-          {/* VISUAL: foto real del local + info integrada */}
-          <div className="lg:col-span-5 lg:row-span-2 lg:row-start-1 animate-fade-up animate-delay-300">
-            <div className="h-full rounded-2xl overflow-hidden border border-white/10 bg-gradient-to-br from-neutral-900 via-neutral-900 to-neutral-950 flex flex-col">
-              <div className="relative flex-1 min-h-[20rem]">
-                <Image
-                  src="/images/local-fachada.jpg"
-                  alt="Fachada de Sunglass Shop Óptica en Plaza Dorada, Mérida"
-                  fill
-                  sizes="(min-width: 1024px) 40vw, 100vw"
-                  className="object-cover"
-                  priority
-                />
-                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-neutral-950/95 to-transparent" />
-              </div>
-
-              <div className="border-t border-white/10 bg-black/30 p-7 space-y-5">
-                <div className="flex items-start gap-3">
-                  <MapPin size={18} className="text-red-500 shrink-0 mt-0.5" />
-                  <div className="space-y-1 text-sm">
-                    <strong className="block text-white font-semibold text-base">Plaza Dorada, Local 64</strong>
-                    <span className="block text-neutral-400">Calle 50 No. 143 x 15 y 19, Nueva Hidalgo</span>
-                    <span className="block text-neutral-500">Entrada 3 por Soriana</span>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <Clock size={18} className="text-red-500 shrink-0 mt-0.5" />
-                  <div className="space-y-1 text-sm">
-                    <strong className="block text-white font-semibold text-base">Lunes a sábado</strong>
-                    <span className="block text-neutral-400">11:00 a 20:00 h</span>
-                  </div>
-                </div>
-
-                <Link
-                  href="/visitanos"
-                  onClick={handleDirectionsClick}
-                  className="group flex items-center justify-between border-t border-white/10 pt-5 text-sm font-semibold uppercase tracking-wider text-white hover:text-red-400 transition-colors"
-                >
-                  Ver mapa y cómo llegar
-                  <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* ACCIONES: 1 CTA primario + secundarios */}
-          <div className="lg:col-span-7 lg:row-start-2 flex flex-col gap-3 animate-fade-up animate-delay-200">
+          <div className="flex flex-col sm:flex-row gap-3 mt-8 animate-fade-up animate-delay-200">
             <Link href="/visitanos" onClick={handleDirectionsClick} className={`${btnPrimary} w-full sm:w-auto`}>
               <MapPin size={18} /> Cómo llegar
             </Link>
-            <div className="flex gap-3">
-              <a
-                href={`${WHATSAPP_URL}?text=${encodeURIComponent("Hola, quisiera información sobre sus lentes y servicios en Plaza Dorada.")}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={handleWhatsappClick}
-                className={`${btnWhatsapp} flex-1 sm:flex-none`}
-              >
-                <WhatsAppIcon size={18} /> WhatsApp
-              </a>
-              <a href="tel:9999874504" onClick={handlePhoneClick} className={`${btnOutlineLight} flex-1 sm:flex-none`}>
-                <Phone size={16} /> Llamar
-              </a>
-            </div>
+            <a
+              href={`${WHATSAPP_URL}?text=${encodeURIComponent("Hola, quisiera información sobre sus lentes y servicios en Plaza Dorada.")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={handleWhatsappClick}
+              className={btnWhatsapp}
+            >
+              <WhatsAppIcon size={18} /> WhatsApp
+            </a>
+            <a href="tel:9999874504" onClick={handlePhoneClick} className={btnOutlineLight}>
+              <Phone size={16} /> Llamar
+            </a>
           </div>
 
+          <div className="mt-auto pt-10 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-8 text-sm animate-fade-up animate-delay-300">
+            <div className="flex items-start gap-2">
+              <MapPin size={16} className="text-red-500 shrink-0 mt-0.5" />
+              <span className="text-neutral-200">Plaza Dorada, Local 64 · Entrada 3 por Soriana</span>
+            </div>
+            <div className="flex items-start gap-2">
+              <Clock size={16} className="text-red-500 shrink-0 mt-0.5" />
+              <span className="text-neutral-200">Lunes a sábado, 11:00 a 20:00 h</span>
+            </div>
+          </div>
         </div>
       </section>
 

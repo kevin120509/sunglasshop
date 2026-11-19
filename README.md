@@ -66,7 +66,7 @@ Desarrollado por **CODIA** para el Señor Juan.
 | Logos de marcas | `images/marcas/` — 14 SVGs |
 | Folletos PDF | `folletos/folleto-lentes-transitions-gen-s.pdf`, `folletos/folleto-micas-deesik-blue-hd-x6.pdf` |
 | Ilustraciones folletos | `folletos/img/` — 6 SVGs |
-| Foto del local | `images/local-fachada.jpg` — usada en el hero de `/` |
+| Foto del local | `images/local-fachada-hero.jpg` — fondo del hero de `/` |
 | Videos de marca | `videos/crizal.mp4`, `videos/kodak-infinite.mp4`, `videos/kodak-esto-cambia-todo.mp4` + posters en `images/videos/` — usados en `/servicios` |
 
 > Los originales sin comprimir (fotos y videos tal como los entregó Juan) viven en `assets/` (fuera de `/public`, ignorado por git). Las versiones en `/public` son copias optimizadas con `sharp`/`ffmpeg` para web.
