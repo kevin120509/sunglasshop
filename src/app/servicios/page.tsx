@@ -93,6 +93,12 @@ const treatments = [
   { icon: Feather, name: "MR-7 · MR-8", text: "Materiales de alto índice: micas más delgadas y ligeras, ideales para graduaciones altas." },
 ];
 
+const brandVideos = [
+  { brand: "Kodak Lens", label: "Esto lo cambia todo", src: "/videos/kodak-esto-cambia-todo.mp4", poster: "/images/videos/poster-kodak-esto-cambia-todo.jpg" },
+  { brand: "Kodak Lens", label: "Vision First Infinite", src: "/videos/kodak-infinite.mp4", poster: "/images/videos/poster-kodak-infinite.jpg" },
+  { brand: "Crizal · Essilor", label: "Resisten casi todos los tests", src: "/videos/crizal.mp4", poster: "/images/videos/poster-crizal.jpg" },
+];
+
 const deliveryChecks = [
   "Medida y color del armazón adecuados a tu rostro y a tu graduación",
   "Tipo y color de mica confirmados según tu pedido",
@@ -280,6 +286,34 @@ export default function ServiciosPage() {
               ))}
             </div>
             <PendingNote>Disponibilidad de marcas y líneas específicas de micas</PendingNote>
+          </div>
+
+          {/* VIDEOS DE MARCA */}
+          <div className="pt-6 space-y-8">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 border-b border-neutral-200 pb-6">
+              <h3 className="text-xl font-semibold tracking-tight text-neutral-900">Conócelas en video</h3>
+              <p className="text-sm text-neutral-500 max-w-md">
+                Material oficial de Kodak Lens y Crizal · Essilor.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {brandVideos.map((v) => (
+                <div key={v.src} className="space-y-2">
+                  <video
+                    controls
+                    preload="none"
+                    poster={v.poster}
+                    className="w-full aspect-video rounded-lg bg-neutral-900"
+                  >
+                    <source src={v.src} type="video/mp4" />
+                  </video>
+                  <div className="space-y-0.5">
+                    <h4 className="text-sm font-semibold text-neutral-900">{v.brand}</h4>
+                    <span className="block text-xs text-neutral-500">{v.label}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* REVISIÓN AL ENTREGAR */}

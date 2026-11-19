@@ -79,73 +79,31 @@ export default function Home() {
   return (
     <div className="flex flex-col">
 
-      {/* 1. HERO */}
-      <section className="relative bg-neutral-950 text-white overflow-hidden">
-        <div className="absolute inset-x-0 bottom-0 h-px bg-red-600" />
-        <div className="max-w-6xl mx-auto px-5 sm:px-6 py-20 lg:py-28 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-x-14 lg:gap-y-10 items-start">
+      <h1 className="sr-only">Sunglass Shop Óptica</h1>
 
-          {/* COPY */}
-          <div className="lg:col-span-7 space-y-6 animate-fade-up animate-delay-100">
-            <Eyebrow light>Plaza Dorada · Mérida, Yucatán</Eyebrow>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.02]">
-              Sunglass Shop <span className="text-red-600">Óptica</span>
-            </h1>
-            <p className="text-xl sm:text-2xl text-neutral-200 leading-snug max-w-xl text-pretty">
-              Examen de la vista, micas de calidad y orientación honesta.
-            </p>
-            <p className="text-base text-neutral-400 leading-relaxed max-w-lg">
-              Primero resolvemos cómo ves. Después te ayudamos a elegir la mica y el armazón adecuados para ti.
-            </p>
-          </div>
+      {/* 1a. HERO MÓVIL (&lt;768px): foto completa sin recorte, info debajo */}
+      <section className="md:hidden bg-neutral-950 text-white">
+        <Image
+          src="/images/local-fachada-hero.jpg"
+          alt="Fachada de Sunglass Shop Óptica en Plaza Dorada, Mérida"
+          width={1367}
+          height={1151}
+          sizes="100vw"
+          className="w-full h-auto"
+          priority
+        />
 
-          {/* VISUAL: foto real del local + info integrada */}
-          <div className="lg:col-span-5 lg:row-span-2 lg:row-start-1 animate-fade-up animate-delay-300">
-            <div className="h-full rounded-2xl overflow-hidden border border-white/10 bg-gradient-to-br from-neutral-900 via-neutral-900 to-neutral-950 flex flex-col">
-              <div className="relative flex-1 min-h-[20rem]">
-                <Image
-                  src="/images/local-fachada.jpg"
-                  alt="Fachada de Sunglass Shop Óptica en Plaza Dorada, Mérida"
-                  fill
-                  sizes="(min-width: 1024px) 40vw, 100vw"
-                  className="object-cover"
-                  priority
-                />
-                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-neutral-950/95 to-transparent" />
-              </div>
+        <div className="px-5 py-6 space-y-4">
+          <Eyebrow light>Plaza Dorada · Mérida, Yucatán</Eyebrow>
+          <p className="text-3xl font-bold tracking-tight leading-[1.08] text-pretty">
+            Examen de la vista, micas de calidad y orientación honesta.
+          </p>
+          <p className="text-base text-neutral-300 leading-relaxed">
+            Primero resolvemos cómo ves. Después te ayudamos a elegir la mica y el armazón adecuados para ti.
+          </p>
 
-              <div className="border-t border-white/10 bg-black/30 p-7 space-y-5">
-                <div className="flex items-start gap-3">
-                  <MapPin size={18} className="text-red-500 shrink-0 mt-0.5" />
-                  <div className="space-y-1 text-sm">
-                    <strong className="block text-white font-semibold text-base">Plaza Dorada, Local 64</strong>
-                    <span className="block text-neutral-400">Calle 50 No. 143 x 15 y 19, Nueva Hidalgo</span>
-                    <span className="block text-neutral-500">Entrada 3 por Soriana</span>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <Clock size={18} className="text-red-500 shrink-0 mt-0.5" />
-                  <div className="space-y-1 text-sm">
-                    <strong className="block text-white font-semibold text-base">Lunes a sábado</strong>
-                    <span className="block text-neutral-400">11:00 a 20:00 h</span>
-                  </div>
-                </div>
-
-                <Link
-                  href="/visitanos"
-                  onClick={handleDirectionsClick}
-                  className="group flex items-center justify-between border-t border-white/10 pt-5 text-sm font-semibold uppercase tracking-wider text-white hover:text-red-400 transition-colors"
-                >
-                  Ver mapa y cómo llegar
-                  <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* ACCIONES: 1 CTA primario + secundarios */}
-          <div className="lg:col-span-7 lg:row-start-2 flex flex-col gap-3 animate-fade-up animate-delay-200">
-            <Link href="/visitanos" onClick={handleDirectionsClick} className={`${btnPrimary} w-full sm:w-auto`}>
+          <div className="flex flex-col gap-3 pt-1">
+            <Link href="/visitanos" onClick={handleDirectionsClick} className={`${btnPrimary} w-full`}>
               <MapPin size={18} /> Cómo llegar
             </Link>
             <div className="flex gap-3">
@@ -154,16 +112,87 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleWhatsappClick}
-                className={`${btnWhatsapp} flex-1 sm:flex-none`}
+                className={`${btnWhatsapp} flex-1`}
               >
                 <WhatsAppIcon size={18} /> WhatsApp
               </a>
-              <a href="tel:9999874504" onClick={handlePhoneClick} className={`${btnOutlineLight} flex-1 sm:flex-none`}>
+              <a href="tel:9999874504" onClick={handlePhoneClick} className={`${btnOutlineLight} flex-1`}>
                 <Phone size={16} /> Llamar
               </a>
             </div>
           </div>
 
+          <div className="pt-4 border-t border-white/10 flex flex-col gap-3 text-sm">
+            <div className="flex items-start gap-2">
+              <MapPin size={16} className="text-red-500 shrink-0 mt-0.5" />
+              <span className="text-neutral-200">Plaza Dorada, Local 64 · Entrada 3 por Soriana</span>
+            </div>
+            <div className="flex items-start gap-2">
+              <Clock size={16} className="text-red-500 shrink-0 mt-0.5" />
+              <span className="text-neutral-200">Lunes a sábado, 11:00 a 20:00 h</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="h-1 bg-red-600" />
+      </section>
+
+      {/* 1b. HERO ESCRITORIO (≥768px): foto en tarjeta junto al texto */}
+      <section className="hidden md:flex relative bg-neutral-950 text-white overflow-hidden min-h-[640px] flex-col">
+        <div className="absolute inset-x-0 bottom-0 h-px bg-red-600 z-20" />
+
+        <div className="flex-1 flex items-center max-w-6xl mx-auto w-full px-5 sm:px-6 py-14 lg:py-20">
+          <div className="grid grid-cols-12 gap-10 lg:gap-14 items-center w-full">
+
+            {/* FOTO EN TARJETA, completa, sin recortar */}
+            <div className="col-span-5 animate-fade-up animate-delay-100">
+              <div className="rounded-2xl overflow-hidden border border-white/10">
+                <Image
+                  src="/images/local-fachada-hero.jpg"
+                  alt="Fachada de Sunglass Shop Óptica en Plaza Dorada, Mérida"
+                  width={1367}
+                  height={1151}
+                  sizes="(min-width: 1024px) 40vw, 45vw"
+                  className="w-full h-auto"
+                  priority
+                />
+                <div className="flex items-center gap-2 bg-neutral-950 px-5 py-3 text-sm">
+                  <MapPin size={16} className="text-red-500 shrink-0" />
+                  <span>Plaza Dorada · Local 64</span>
+                </div>
+              </div>
+            </div>
+
+            {/* TEXTO */}
+            <div className="col-span-7 space-y-5 animate-fade-up animate-delay-200">
+              <Eyebrow light>Plaza Dorada · Mérida, Yucatán</Eyebrow>
+              <p className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.08] text-pretty">
+                Examen de la vista, micas de calidad y orientación honesta.
+              </p>
+              <p className="text-base sm:text-lg text-neutral-300 leading-relaxed max-w-md">
+                Primero resolvemos cómo ves. Después te ayudamos a elegir la mica y el armazón adecuados para ti.
+              </p>
+
+              <div className="flex flex-wrap gap-3 pt-2">
+                <Link href="/visitanos" onClick={handleDirectionsClick} className={btnPrimary}>
+                  <MapPin size={18} /> Cómo llegar
+                </Link>
+                <a
+                  href={`${WHATSAPP_URL}?text=${encodeURIComponent("Hola, quisiera información sobre sus lentes y servicios en Plaza Dorada.")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={handleWhatsappClick}
+                  className={btnWhatsapp}
+                >
+                  <WhatsAppIcon size={18} /> WhatsApp
+                </a>
+                <a href="tel:9999874504" onClick={handlePhoneClick} className={btnOutlineLight}>
+                  <Phone size={16} /> Llamar
+                </a>
+              </div>
+            </div>
+
+          </div>
         </div>
       </section>
 
