@@ -137,64 +137,61 @@ export default function Home() {
         <div className="h-1 bg-red-600" />
       </section>
 
-      {/* 1b. HERO ESCRITORIO (≥768px): foto real de fondo, clara arriba, información abajo */}
-      <section className="hidden md:flex relative bg-neutral-950 text-white overflow-hidden min-h-[820px] lg:min-h-[760px] flex-col">
+      {/* 1b. HERO ESCRITORIO (≥768px): foto en tarjeta junto al texto */}
+      <section className="hidden md:flex relative bg-neutral-950 text-white overflow-hidden min-h-[640px] flex-col">
         <div className="absolute inset-x-0 bottom-0 h-px bg-red-600 z-20" />
 
-        {/* La foto se limita a un ancho máximo para que en monitores muy anchos
-            no se vea forzada a recortarse verticalmente hasta perder el local. */}
-        <div className="absolute inset-y-0 left-1/2 w-full max-w-[1536px] -translate-x-1/2">
-          <Image
-            src="/images/local-fachada-hero.jpg"
-            alt="Interior de Sunglass Shop Óptica en Plaza Dorada, Mérida"
-            fill
-            sizes="1536px"
-            className="object-cover object-[center_30%]"
-            priority
-          />
-        </div>
-        <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-neutral-950 via-neutral-950/85 to-transparent" />
+        <div className="flex-1 flex items-center max-w-6xl mx-auto w-full px-5 sm:px-6 py-14 lg:py-20">
+          <div className="grid grid-cols-12 gap-10 lg:gap-14 items-center w-full">
 
-        <div className="relative z-10 flex flex-col flex-1 max-w-6xl mx-auto w-full px-5 sm:px-6 py-10 lg:py-14">
-          <div className="flex-1" />
-
-          <div className="space-y-5 max-w-xl animate-fade-up animate-delay-100 drop-shadow-[0_3px_14px_rgba(0,0,0,0.9)]">
-            <Eyebrow light>Plaza Dorada · Mérida, Yucatán</Eyebrow>
-            <p className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.08] text-pretty">
-              Examen de la vista, micas de calidad y orientación honesta.
-            </p>
-            <p className="text-base sm:text-lg text-neutral-300 leading-relaxed max-w-md">
-              Primero resolvemos cómo ves. Después te ayudamos a elegir la mica y el armazón adecuados para ti.
-            </p>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-3 mt-8 animate-fade-up animate-delay-200">
-            <Link href="/visitanos" onClick={handleDirectionsClick} className={`${btnPrimary} w-full sm:w-auto`}>
-              <MapPin size={18} /> Cómo llegar
-            </Link>
-            <a
-              href={`${WHATSAPP_URL}?text=${encodeURIComponent("Hola, quisiera información sobre sus lentes y servicios en Plaza Dorada.")}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={handleWhatsappClick}
-              className={btnWhatsapp}
-            >
-              <WhatsAppIcon size={18} /> WhatsApp
-            </a>
-            <a href="tel:9999874504" onClick={handlePhoneClick} className={btnOutlineLight}>
-              <Phone size={16} /> Llamar
-            </a>
-          </div>
-
-          <div className="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-8 text-sm animate-fade-up animate-delay-300">
-            <div className="flex items-start gap-2">
-              <MapPin size={16} className="text-red-500 shrink-0 mt-0.5" />
-              <span className="text-neutral-200">Plaza Dorada, Local 64 · Entrada 3 por Soriana</span>
+            {/* FOTO EN TARJETA, completa, sin recortar */}
+            <div className="col-span-5 animate-fade-up animate-delay-100">
+              <div className="rounded-2xl overflow-hidden border border-white/10">
+                <Image
+                  src="/images/local-fachada-hero.jpg"
+                  alt="Fachada de Sunglass Shop Óptica en Plaza Dorada, Mérida"
+                  width={1367}
+                  height={1151}
+                  sizes="(min-width: 1024px) 40vw, 45vw"
+                  className="w-full h-auto"
+                  priority
+                />
+                <div className="flex items-center gap-2 bg-neutral-950 px-5 py-3 text-sm">
+                  <MapPin size={16} className="text-red-500 shrink-0" />
+                  <span>Plaza Dorada · Local 64</span>
+                </div>
+              </div>
             </div>
-            <div className="flex items-start gap-2">
-              <Clock size={16} className="text-red-500 shrink-0 mt-0.5" />
-              <span className="text-neutral-200">Lunes a sábado, 11:00 a 20:00 h</span>
+
+            {/* TEXTO */}
+            <div className="col-span-7 space-y-5 animate-fade-up animate-delay-200">
+              <Eyebrow light>Plaza Dorada · Mérida, Yucatán</Eyebrow>
+              <p className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.08] text-pretty">
+                Examen de la vista, micas de calidad y orientación honesta.
+              </p>
+              <p className="text-base sm:text-lg text-neutral-300 leading-relaxed max-w-md">
+                Primero resolvemos cómo ves. Después te ayudamos a elegir la mica y el armazón adecuados para ti.
+              </p>
+
+              <div className="flex flex-wrap gap-3 pt-2">
+                <Link href="/visitanos" onClick={handleDirectionsClick} className={btnPrimary}>
+                  <MapPin size={18} /> Cómo llegar
+                </Link>
+                <a
+                  href={`${WHATSAPP_URL}?text=${encodeURIComponent("Hola, quisiera información sobre sus lentes y servicios en Plaza Dorada.")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={handleWhatsappClick}
+                  className={btnWhatsapp}
+                >
+                  <WhatsAppIcon size={18} /> WhatsApp
+                </a>
+                <a href="tel:9999874504" onClick={handlePhoneClick} className={btnOutlineLight}>
+                  <Phone size={16} /> Llamar
+                </a>
+              </div>
             </div>
+
           </div>
         </div>
       </section>
