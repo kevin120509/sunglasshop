@@ -79,8 +79,66 @@ export default function Home() {
   return (
     <div className="flex flex-col">
 
-      {/* 1. HERO: foto real de fondo, clara arriba, información abajo */}
-      <section className="relative bg-neutral-950 text-white overflow-hidden min-h-[820px] lg:min-h-[760px] flex flex-col">
+      <h1 className="sr-only">Sunglass Shop Óptica</h1>
+
+      {/* 1a. HERO MÓVIL (&lt;768px): foto completa sin recorte, info debajo */}
+      <section className="md:hidden bg-neutral-950 text-white">
+        <Image
+          src="/images/local-fachada-hero.jpg"
+          alt="Fachada de Sunglass Shop Óptica en Plaza Dorada, Mérida"
+          width={1367}
+          height={1151}
+          sizes="100vw"
+          className="w-full h-auto"
+          priority
+        />
+
+        <div className="px-5 py-6 space-y-4">
+          <Eyebrow light>Plaza Dorada · Mérida, Yucatán</Eyebrow>
+          <p className="text-3xl font-bold tracking-tight leading-[1.08] text-pretty">
+            Examen de la vista, micas de calidad y orientación honesta.
+          </p>
+          <p className="text-base text-neutral-300 leading-relaxed">
+            Primero resolvemos cómo ves. Después te ayudamos a elegir la mica y el armazón adecuados para ti.
+          </p>
+
+          <div className="flex flex-col gap-3 pt-1">
+            <Link href="/visitanos" onClick={handleDirectionsClick} className={`${btnPrimary} w-full`}>
+              <MapPin size={18} /> Cómo llegar
+            </Link>
+            <div className="flex gap-3">
+              <a
+                href={`${WHATSAPP_URL}?text=${encodeURIComponent("Hola, quisiera información sobre sus lentes y servicios en Plaza Dorada.")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleWhatsappClick}
+                className={`${btnWhatsapp} flex-1`}
+              >
+                <WhatsAppIcon size={18} /> WhatsApp
+              </a>
+              <a href="tel:9999874504" onClick={handlePhoneClick} className={`${btnOutlineLight} flex-1`}>
+                <Phone size={16} /> Llamar
+              </a>
+            </div>
+          </div>
+
+          <div className="pt-4 border-t border-white/10 flex flex-col gap-3 text-sm">
+            <div className="flex items-start gap-2">
+              <MapPin size={16} className="text-red-500 shrink-0 mt-0.5" />
+              <span className="text-neutral-200">Plaza Dorada, Local 64 · Entrada 3 por Soriana</span>
+            </div>
+            <div className="flex items-start gap-2">
+              <Clock size={16} className="text-red-500 shrink-0 mt-0.5" />
+              <span className="text-neutral-200">Lunes a sábado, 11:00 a 20:00 h</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="h-1 bg-red-600" />
+      </section>
+
+      {/* 1b. HERO ESCRITORIO (≥768px): foto real de fondo, clara arriba, información abajo */}
+      <section className="hidden md:flex relative bg-neutral-950 text-white overflow-hidden min-h-[820px] lg:min-h-[760px] flex-col">
         <div className="absolute inset-x-0 bottom-0 h-px bg-red-600 z-20" />
 
         <Image
@@ -94,8 +152,6 @@ export default function Home() {
         <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-neutral-950 via-neutral-950/85 to-transparent" />
 
         <div className="relative z-10 flex flex-col flex-1 max-w-6xl mx-auto w-full px-5 sm:px-6 py-10 lg:py-14">
-          <h1 className="sr-only">Sunglass Shop Óptica</h1>
-
           <div className="flex-1" />
 
           <div className="space-y-5 max-w-xl animate-fade-up animate-delay-100 drop-shadow-[0_3px_14px_rgba(0,0,0,0.9)]">
